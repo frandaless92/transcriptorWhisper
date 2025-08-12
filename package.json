@@ -1,0 +1,20 @@
+{
+  "name": "transcriptor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "docx": "^9.5.1",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "xml2js": "^0.6.2"
+  }
+}

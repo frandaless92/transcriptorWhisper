@@ -1,0 +1,43 @@
+:root {
+  --accent: #6f42c1;
+}
+body {
+  background: #0f0f12;
+  color: #e9e9ee;
+}
+a {
+  color: #c5b3ff;
+}
+.navbar {
+  background: #15151b;
+}
+.card {
+  background: #17171e;
+  border: 1px solid #23232d;
+}
+.dropzone {
+  border: 2px dashed #3a3a47;
+  border-radius: 14px;
+  background: #14141b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.dropzone.dragover {
+  border-color: var(--accent);
+  background: #1a1a24;
+}
+.progress {
+  height: 12px;
+  background: #2a2a35;
+}
+.progress-bar {
+  background-color: var(--accent);
+}
+.badge-soft {
+  background: #232334;
+  color: #cfcfe6;
+  border: 1px solid #2f2f45;
+}
+code {
+  color: #c5b3ff;
+}
