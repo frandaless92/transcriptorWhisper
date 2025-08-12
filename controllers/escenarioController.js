@@ -5,6 +5,24 @@ const AdmZip = require("adm-zip");
 const { execSync } = require("child_process");
 const { Document, Packer, Paragraph, TextRun } = require("docx");
 
+// === Config Whisper ===
+const WHISPER_BIN =
+  process.env.WHISPER_BIN || "/home/administrator/whisper_env/bin/whisper";
+const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || ""; // opcional para cache de modelos
+function whisperCmd(wavPath, outDir) {
+  const modelDirArg = WHISPER_MODEL_DIR
+    ? ` --model_dir "${WHISPER_MODEL_DIR}"`
+    : "";
+  return `"${WHISPER_BIN}" "${wavPath}" --model small --language Spanish --output_dir "${outDir}" --output_format txt${modelDirArg}`;
+}
+if (!fs.existsSync(WHISPER_BIN)) {
+  console.error("❌ No se encontró WHISPER_BIN en:", WHISPER_BIN);
+}
+
+// === Rutas absolutas seguras (no dependen del cwd) ===
+const PROJECT_ROOT = path.resolve(__dirname, ".."); // carpeta raíz del proyecto
+const UPLOADS_ROOT = path.join(PROJECT_ROOT, "uploads"); // /opt/transcriptor/.../uploads
+
 // util: borrar recursivo seguro
 function rmrf(p) {
   try {
@@ -36,15 +54,13 @@ function findFileRecursive(baseDir, targetNamesLower = ["scenario.xml"]) {
 }
 
 const procesarZip = async (req, res) => {
-  // paths para cleanup condicional
   let zipPath, jobDir, workDir, docPath;
 
   try {
-    if (!req.file) {
+    if (!req.file)
       return res
         .status(400)
         .json({ error: "No se recibió ningún archivo .zip" });
-    }
 
     // 1) Localizar ZIP subido por multer
     zipPath =
@@ -55,9 +71,9 @@ const procesarZip = async (req, res) => {
         .json({ error: "No se pudo localizar el zip subido" });
     }
 
-    // 2) Crear carpeta de trabajo única
-    const uploadsRoot = path.join("uploads");
-    const jobsRoot = path.join(uploadsRoot, "jobs");
+    // 2) Crear carpeta de trabajo única dentro de uploads/jobs
+    fs.mkdirSync(UPLOADS_ROOT, { recursive: true });
+    const jobsRoot = path.join(UPLOADS_ROOT, "jobs");
     fs.mkdirSync(jobsRoot, { recursive: true });
 
     const base = path
@@ -72,7 +88,7 @@ const procesarZip = async (req, res) => {
     const zip = new AdmZip(zipPath);
     zip.extractAllTo(workDir, true);
 
-    // 4) scenario.xml SOLO dentro del work/
+    // 4) scenario.xml SOLO dentro de work/
     const xmlPrincipalPath = findFileRecursive(workDir, [
       "scenario.xml",
       "Scenario.xml",
@@ -101,9 +117,11 @@ const procesarZip = async (req, res) => {
       rutaRelativa.replace(/\\/g, path.sep)
     );
     if (!fs.existsSync(rutaItemsXML)) {
-      return res.status(404).json({
-        error: "No se encontró el archivo Recorded Items.xml interno",
-      });
+      return res
+        .status(404)
+        .json({
+          error: "No se encontró el archivo Recorded Items.xml interno",
+        });
     }
 
     const itemsData = fs.readFileSync(rutaItemsXML, "utf-8");
@@ -121,7 +139,7 @@ const procesarZip = async (req, res) => {
     for (let i = 0; i < items.length; i++) {
       const nombreItem = `Item${i + 1}`;
 
-      // detectar XML del item: carpeta ItemN/ o ItemN.xml
+      // localizar XML del item: carpeta ItemN/ o ItemN.xml
       let xmlItemPath = null;
       const itemDir = path.join(folderItems, nombreItem);
       if (fs.existsSync(itemDir)) {
@@ -150,13 +168,16 @@ const procesarZip = async (req, res) => {
       const wavPath = path.join(itemBaseDir, archivo);
       const txtPath = path.join(itemBaseDir, archivo.replace(/\.\w+$/, ".txt"));
 
+      // **Nuevo**: si no existe el WAV, no intentes transcribir
+      if (!fs.existsSync(wavPath)) {
+        fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR] (WAV no encontrado)");
+      }
+
       if (!fs.existsSync(txtPath)) {
         try {
-          execSync(
-            `whisper "${wavPath}" --model small --language Spanish --output_dir "${itemBaseDir}" --output_format txt`,
-            { stdio: "ignore" }
-          );
-        } catch {
+          execSync(whisperCmd(wavPath, itemBaseDir), { stdio: "ignore" });
+        } catch (e) {
+          console.error("❌ Whisper falló:", e?.message || e);
           fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR]");
         }
       }
@@ -227,15 +248,16 @@ const procesarZip = async (req, res) => {
     } catch {}
     rmrf(workDir);
 
-    // 7) Devolver URL correcta
+    // 7) Devolver URL correcta (tu Express sirve /uploads estático)
     const publicPath = `/uploads/jobs/${path.basename(jobDir)}/${fileName}`;
-    return res.status(200).json({
-      mensaje: "Escenario transcripto completamente",
-      archivo: publicPath,
-    });
+    return res
+      .status(200)
+      .json({
+        mensaje: "Escenario transcripto completamente",
+        archivo: publicPath,
+      });
   } catch (err) {
     console.error("❌ Error al procesar el escenario:", err);
-    // En error: dejamos zip y workDir para inspección
     return res.status(500).json({ error: "Error al procesar el archivo zip" });
   }
 };
