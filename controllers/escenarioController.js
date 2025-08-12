@@ -1,3 +1,4 @@
+/* controllers/escenarioController.js — versión con LOGS detallados */
 const fs = require("fs");
 const path = require("path");
 const xml2js = require("xml2js");
@@ -5,10 +6,26 @@ const AdmZip = require("adm-zip");
 const { execSync } = require("child_process");
 const { Document, Packer, Paragraph, TextRun } = require("docx");
 
-// === Config Whisper ===
+// ========= Helpers de logging =========
+const nowISO = () => new Date().toISOString();
+const log = (...args) => console.log(nowISO(), "[TRANSCRIPCION]", ...args);
+const logErr = (...args) =>
+  console.error(nowISO(), "❌[TRANSCRIPCION]", ...args);
+const fmtB = (n) => `${(n / (1024 * 1024)).toFixed(2)} MB`;
+
+function memLog(tag) {
+  const m = process.memoryUsage();
+  log(
+    `MEM ${tag} heapUsed=${fmtB(m.heapUsed)} rss=${fmtB(m.rss)} ext=${fmtB(
+      m.external
+    )}`
+  );
+}
+
+// ========= Config Whisper =========
 const WHISPER_BIN =
   process.env.WHISPER_BIN || "/home/administrator/whisper_env/bin/whisper";
-const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || ""; // opcional para cache de modelos
+const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
 function whisperCmd(wavPath, outDir) {
   const modelDirArg = WHISPER_MODEL_DIR
     ? ` --model_dir "${WHISPER_MODEL_DIR}"`
@@ -16,20 +33,15 @@ function whisperCmd(wavPath, outDir) {
   return `"${WHISPER_BIN}" "${wavPath}" --model small --language Spanish --output_dir "${outDir}" --output_format txt${modelDirArg}`;
 }
 if (!fs.existsSync(WHISPER_BIN)) {
-  console.error("❌ No se encontró WHISPER_BIN en:", WHISPER_BIN);
+  logErr("No se encontró WHISPER_BIN en:", WHISPER_BIN);
 }
 
-// === Rutas absolutas seguras (no dependen del cwd) ===
-const PROJECT_ROOT = path.resolve(__dirname, ".."); // carpeta raíz del proyecto
-const UPLOADS_ROOT = path.join(PROJECT_ROOT, "uploads"); // /opt/transcriptor/.../uploads
-
-// util: borrar recursivo seguro
+// ========= Utils =========
 function rmrf(p) {
   try {
     fs.rmSync(p, { recursive: true, force: true });
   } catch {}
 }
-// util: buscar archivo por nombre (case-insensitive) dentro de baseDir
 function findFileRecursive(baseDir, targetNamesLower = ["scenario.xml"]) {
   const stack = [baseDir];
   while (stack.length) {
@@ -53,16 +65,27 @@ function findFileRecursive(baseDir, targetNamesLower = ["scenario.xml"]) {
   return null;
 }
 
+// ========= Handler principal =========
 const procesarZip = async (req, res) => {
+  // evitar timeouts en requests largos
+  try {
+    req.setTimeout(0);
+  } catch {}
+  try {
+    res.setTimeout(0);
+  } catch {}
+
   let zipPath, jobDir, workDir, docPath;
+  const t0 = Date.now();
 
   try {
-    if (!req.file)
+    if (!req.file) {
       return res
         .status(400)
         .json({ error: "No se recibió ningún archivo .zip" });
+    }
 
-    // 1) Localizar ZIP subido por multer
+    // 1) Localizar ZIP
     zipPath =
       req.file.path || path.join(req.file.destination || "", req.file.filename);
     if (!zipPath || !fs.existsSync(zipPath)) {
@@ -70,9 +93,14 @@ const procesarZip = async (req, res) => {
         .status(400)
         .json({ error: "No se pudo localizar el zip subido" });
     }
+    const zipStat = fs.statSync(zipPath);
+    log(`ZIP recibido -> ${zipPath} (${fmtB(zipStat.size)})`);
 
-    // 2) Crear carpeta de trabajo única dentro de uploads/jobs
+    // 2) Directorios absolutos (independientes del cwd)
+    const PROJECT_ROOT = path.resolve(__dirname, "..");
+    const UPLOADS_ROOT = path.join(PROJECT_ROOT, "uploads");
     fs.mkdirSync(UPLOADS_ROOT, { recursive: true });
+
     const jobsRoot = path.join(UPLOADS_ROOT, "jobs");
     fs.mkdirSync(jobsRoot, { recursive: true });
 
@@ -84,38 +112,59 @@ const procesarZip = async (req, res) => {
     workDir = path.join(jobDir, "work");
     fs.mkdirSync(workDir, { recursive: true });
 
-    // 3) Extraer ZIP dentro de work/
+    log(`JOB ${jobId} creado -> jobDir=${jobDir}`);
+    memLog("inicio");
+
+    // 3) Extraer ZIP
+    const tUnzip0 = Date.now();
     const zip = new AdmZip(zipPath);
     zip.extractAllTo(workDir, true);
+    const tUnzip1 = Date.now();
+    log(`Unzip OK en ${tUnzip1 - tUnzip0} ms -> workDir=${workDir}`);
 
-    // 4) scenario.xml SOLO dentro de work/
+    // 4) Buscar scenario.xml
+    const tFindScenario0 = Date.now();
     const xmlPrincipalPath = findFileRecursive(workDir, [
       "scenario.xml",
       "Scenario.xml",
     ]);
+    const tFindScenario1 = Date.now();
+    log(
+      `Buscar scenario.xml: ${tFindScenario1 - tFindScenario0} ms -> ${
+        xmlPrincipalPath || "NO ENCONTRADO"
+      }`
+    );
     if (!xmlPrincipalPath) {
       return res
         .status(404)
         .json({ error: "No se encontró scenario.xml en el escenario" });
     }
 
+    // 5) Parsear scenario.xml
     const carpetaBase = path.dirname(xmlPrincipalPath);
     const xmlData = fs.readFileSync(xmlPrincipalPath, "utf-8");
     const parser = new xml2js.Parser();
+
+    const tParseScenario0 = Date.now();
     const escenarioParsed = await parser.parseStringPromise(xmlData);
+    const tParseScenario1 = Date.now();
+    log(`Parse scenario.xml: ${tParseScenario1 - tParseScenario0} ms`);
 
     const rutaRelativa =
       escenarioParsed?.Scenario?.Components?.[0]?.RecordedItems?.[0];
+    log("RecordedItems path leído del XML:", rutaRelativa);
     if (!rutaRelativa || typeof rutaRelativa !== "string") {
       return res
         .status(400)
         .json({ error: "No se encontró la ruta de Recorded Items" });
     }
 
+    // 6) Abrir Recorded Items.xml
     const rutaItemsXML = path.join(
       carpetaBase,
       rutaRelativa.replace(/\\/g, path.sep)
     );
+    log("Ruta absoluta de Recorded Items:", rutaItemsXML);
     if (!fs.existsSync(rutaItemsXML)) {
       return res
         .status(404)
@@ -125,8 +174,16 @@ const procesarZip = async (req, res) => {
     }
 
     const itemsData = fs.readFileSync(rutaItemsXML, "utf-8");
+    const tParseItems0 = Date.now();
     const itemsParsed = await parser.parseStringPromise(itemsData);
+    const tParseItems1 = Date.now();
     const items = itemsParsed?.RecordedItems?.Item;
+    log(
+      `Parse Recorded Items.xml: ${tParseItems1 - tParseItems0} ms | Items: ${
+        items ? items.length : 0
+      }`
+    );
+
     if (!items || items.length === 0) {
       return res
         .status(400)
@@ -135,11 +192,17 @@ const procesarZip = async (req, res) => {
 
     const folderItems = path.dirname(rutaItemsXML);
     const docParagraphs = [];
+    let itemsProcesados = 0,
+      transOk = 0,
+      transError = 0;
 
+    // 7) Procesar cada Item
     for (let i = 0; i < items.length; i++) {
       const nombreItem = `Item${i + 1}`;
+      const tItem0 = Date.now();
+      log(`→ Procesando ${nombreItem}`);
 
-      // localizar XML del item: carpeta ItemN/ o ItemN.xml
+      // localizar XML del item
       let xmlItemPath = null;
       const itemDir = path.join(folderItems, nombreItem);
       if (fs.existsSync(itemDir)) {
@@ -151,10 +214,18 @@ const procesarZip = async (req, res) => {
         const posible = path.join(folderItems, `${nombreItem}.xml`);
         if (fs.existsSync(posible)) xmlItemPath = posible;
       }
-      if (!xmlItemPath || !fs.existsSync(xmlItemPath)) continue;
+      log(`XML ${nombreItem}: ${xmlItemPath || "NO ENCONTRADO"}`);
+      if (!xmlItemPath || !fs.existsSync(xmlItemPath)) {
+        log(`⚠️ Saltando ${nombreItem} (sin XML)`);
+        continue;
+      }
 
+      // parse del item
+      const tParseItem0 = Date.now();
       const itemXML = fs.readFileSync(xmlItemPath, "utf-8");
       const parsed = await parser.parseStringPromise(itemXML);
+      const tParseItem1 = Date.now();
+      log(`${nombreItem}: parse XML en ${tParseItem1 - tParseItem0} ms`);
 
       const result = parsed?.Item;
       const audio =
@@ -167,26 +238,58 @@ const procesarZip = async (req, res) => {
       const itemBaseDir = path.dirname(xmlItemPath);
       const wavPath = path.join(itemBaseDir, archivo);
       const txtPath = path.join(itemBaseDir, archivo.replace(/\.\w+$/, ".txt"));
+      log(`${nombreItem}: WAV=${wavPath}`);
 
-      // **Nuevo**: si no existe el WAV, no intentes transcribir
       if (!fs.existsSync(wavPath)) {
-        fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR] (WAV no encontrado)");
-      }
-
-      if (!fs.existsSync(txtPath)) {
+        logErr(`${nombreItem}: WAV no encontrado, escribo TXT de error`);
         try {
-          execSync(whisperCmd(wavPath, itemBaseDir), { stdio: "ignore" });
-        } catch (e) {
-          console.error("❌ Whisper falló:", e?.message || e);
-          fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR]");
+          fs.writeFileSync(
+            txtPath,
+            "[ERROR AL TRANSCRIBIR] (WAV no encontrado)"
+          );
+        } catch {}
+        transError++;
+      } else {
+        // si no hay txt, invocar whisper
+        if (!fs.existsSync(txtPath)) {
+          const cmd = whisperCmd(wavPath, itemBaseDir);
+          log(`${nombreItem}: Invocando Whisper -> ${cmd}`);
+          const tWh0 = Date.now();
+          try {
+            execSync(cmd, { stdio: "ignore" });
+            const tWh1 = Date.now();
+            log(`${nombreItem}: Whisper OK en ${tWh1 - tWh0} ms`);
+            transOk++;
+          } catch (e) {
+            const tWh1 = Date.now();
+            logErr(
+              `${nombreItem}: Whisper FALLÓ en ${tWh1 - tWh0} ms ::`,
+              e?.message || e
+            );
+            try {
+              fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR]");
+            } catch {}
+            transError++;
+          }
+        } else {
+          log(`${nombreItem}: TXT ya existía, no re-transcribo`);
         }
       }
 
+      // leer txt
       let contenido = "[ERROR AL TRANSCRIBIR]";
+      const tReadTxt0 = Date.now();
       try {
-        contenido = fs.readFileSync(txtPath, "utf-8").toUpperCase();
+        contenido = fs.readFileSync(txtPath, "utf-8");
       } catch {}
+      const tReadTxt1 = Date.now();
+      log(
+        `${nombreItem}: leer TXT ${tReadTxt1 - tReadTxt0} ms | size=${
+          fs.existsSync(txtPath) ? fmtB(fs.statSync(txtPath).size) : "n/a"
+        }`
+      );
 
+      // metadatos
       const metadatos =
         result?.RecordedItem?.[0]?.SearchResults?.[0]?.SearchResult?.[0]
           ?.Fields?.[0]?.Field || [];
@@ -208,7 +311,8 @@ const procesarZip = async (req, res) => {
         }
         return acc;
       }, {});
-
+      // construir párrafos (mantengo tu enfoque 1:1 para no cambiar lógica)
+      const tParas0 = Date.now();
       docParagraphs.push(
         new Paragraph({ text: `🎧 Item: ${nombreItem}`, bold: true }),
         new Paragraph({ text: `🕒 Inicio: ${start || "-"}`, bold: true }),
@@ -222,34 +326,94 @@ const procesarZip = async (req, res) => {
         }),
         new Paragraph({ text: `👤 ID: ${extra.UnitID || "-"}`, bold: true }),
         new Paragraph({ text: `📝 Transcripción:` }),
-        ...contenido.split("\n").map(
-          (line) =>
-            new Paragraph({
-              children: [new TextRun({ text: line.trim(), size: 24 })],
-            }) // 12pt
-        ),
+        ...contenido
+          .split(/\r?\n/)
+          .map(
+            (line) =>
+              new Paragraph({
+                children: [
+                  new TextRun({ text: (line || "").trim(), size: 24 }),
+                ],
+              })
+          ),
         new Paragraph("────────────────────────────────────────────")
       );
+      const tParas1 = Date.now();
+      log(
+        `${nombreItem}: construir párrafos ${tParas1 - tParas0} ms (líneas=${
+          (contenido.match(/\r?\n/g) || []).length + 1
+        })`
+      );
+
+      itemsProcesados++;
+      const tItem1 = Date.now();
+      memLog(`${nombreItem} fin`);
+      log(`← ${nombreItem} OK en ${tItem1 - tItem0} ms`);
     }
 
-    // 5) Guardar DOCX en jobDir (fuera de work/)
+    log(
+      `Items procesados=${itemsProcesados} | trans OK=${transOk} | trans ERROR=${transError}`
+    );
+    memLog("antes de Packer");
+
+    // 8) Packer (docx)
     const doc = new Document({
       sections: [{ properties: {}, children: docParagraphs }],
     });
-    const buffer = await Packer.toBuffer(doc);
 
+    const tPack0 = Date.now();
+    let buffer;
+    try {
+      buffer = await Packer.toBuffer(doc);
+    } catch (e) {
+      logErr("Packer falló:", e?.message || e);
+      // Fallback mínimo para no dejar colgado el request
+      const mini = new Document({
+        sections: [
+          {
+            children: [
+              new Paragraph(
+                "Transcripción generada parcialmente (packer falló)."
+              ),
+            ],
+          },
+        ],
+      });
+      buffer = await Packer.toBuffer(mini);
+    }
+    const tPack1 = Date.now();
+    log(
+      `Packer.toBuffer ${tPack1 - tPack0} ms | docParagraphs=${
+        docParagraphs.length
+      } | buffer=${fmtB(buffer.length)}`
+    );
+    memLog("post Packer");
+
+    // 9) Escribir archivo final
     const fileName = `transcripcion-${base}.docx`;
     docPath = path.join(jobDir, fileName);
-    fs.writeFileSync(docPath, buffer);
 
-    // 6) LIMPIEZA: borrar ZIP original y carpeta work/
+    const tWrite0 = Date.now();
+    fs.writeFileSync(docPath, buffer);
+    const tWrite1 = Date.now();
+    log(`Escritura DOCX ${tWrite1 - tWrite0} ms -> ${docPath}`);
+
+    // 10) Limpieza
+    const tClean0 = Date.now();
     try {
       fs.unlinkSync(zipPath);
+      log("ZIP eliminado:", zipPath);
     } catch {}
     rmrf(workDir);
+    log("work/ eliminado:", workDir);
+    const tClean1 = Date.now();
+    log(`Limpieza ${tClean1 - tClean0} ms`);
 
-    // 7) Devolver URL correcta (tu Express sirve /uploads estático)
+    // 11) Respuesta
     const publicPath = `/uploads/jobs/${path.basename(jobDir)}/${fileName}`;
+    const t1 = Date.now();
+    log(`JOB ${path.basename(jobDir)} FIN en ${t1 - t0} ms`);
+    memLog("fin job");
     return res
       .status(200)
       .json({
@@ -257,7 +421,8 @@ const procesarZip = async (req, res) => {
         archivo: publicPath,
       });
   } catch (err) {
-    console.error("❌ Error al procesar el escenario:", err);
+    logErr("Error no controlado:", err?.stack || err?.message || err);
+    // en error, no borramos work/ para inspección
     return res.status(500).json({ error: "Error al procesar el archivo zip" });
   }
 };
