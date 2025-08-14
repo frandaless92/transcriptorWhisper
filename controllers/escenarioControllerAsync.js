@@ -421,7 +421,7 @@ async function runZipJob(zipPath, update) {
         logErr(`${nombreItem}: WAV no encontrado, escribo TXT de error`);
         try {
           fs.writeFileSync(
-            txtPath,
+            txtPathFromOriginal,
             "[ERROR AL TRANSCRIBIR] (WAV no encontrado)"
           );
         } catch {}
@@ -446,8 +446,21 @@ async function runZipJob(zipPath, update) {
           wavSanitizado = wavPathOriginal;
         }
 
-        // (B) Si no hay TXT, transcribir con Whisper usando el WAV sanitizado
-        if (!fs.existsSync(txtPath)) {
+        // TXT esperado del WAV realmente usado por Whisper
+        const baseNameFinal = path.basename(
+          wavSanitizado || wavPathOriginal,
+          path.extname(wavSanitizado || wavPathOriginal)
+        );
+        const txtPathFromSanitized = path.join(
+          itemBaseDir,
+          baseNameFinal + ".txt"
+        );
+
+        // (B) Si no hay TXT (ni del sanitizado ni del original), transcribir con Whisper
+        if (
+          !fs.existsSync(txtPathFromSanitized) &&
+          !fs.existsSync(txtPathFromOriginal)
+        ) {
           try {
             const tW0 = Date.now();
             await runWhisperAsync(wavSanitizado, itemBaseDir);
@@ -456,14 +469,6 @@ async function runZipJob(zipPath, update) {
           } catch (e) {
             logErr(`${nombreItem}: Whisper FALLÓ ::`, e?.message || e);
             try {
-              const baseNameFinal = path.basename(
-                wavSanitizado || wavPathOriginal,
-                path.extname(wavSanitizado || wavPathOriginal)
-              );
-              const txtPathFromSanitized = path.join(
-                itemBaseDir,
-                baseNameFinal + ".txt"
-              );
               const targetTxt = txtPathFromSanitized || txtPathFromOriginal;
               fs.writeFileSync(targetTxt, "[ERROR AL TRANSCRIBIR]");
             } catch {}
