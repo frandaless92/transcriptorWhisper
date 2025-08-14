@@ -7,7 +7,7 @@ const path = require("path");
 const xml2js = require("xml2js");
 const AdmZip = require("adm-zip");
 const { spawn } = require("child_process");
-const { Document, Packer, Paragraph, TextRun } = require("docx");
+const { Document, Packer, Paragraph, TextRun, TabStopType } = require("docx");
 const { createJob, getJob } = require("../queue/jobQueue");
 
 // ========= Helpers de logging =========
@@ -49,7 +49,7 @@ const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
 
 const INITIAL_PROMPT_ASCII =
   "Audio de comunicaciones de radio policiales. Usar abreviaturas y codigo Q. " +
-  "Abreviaturas/siglas" +
+  "Abreviaturas/siglas. " +
   "Codigo Q frecuente: QSL, QRV, QTH, QRM, QRX, QRT, QRP, QRO, QSY, QSA, QSB, QTC, QTR.";
 
 const USE_INITIAL_PROMPT =
@@ -138,7 +138,7 @@ function runWhisperAsync(wavPath, outDir) {
     const args = [
       wavPath,
       "--model",
-      "large-v3",
+      "small",
       "--language",
       process.env.WHISPER_LANG || "Spanish",
       "--fp16",
@@ -619,13 +619,29 @@ async function runZipJob(zipPath, update) {
       }
       texto = finalizarConPuntoGuion(U(texto));
 
-      // Agregar líneas al DOCX con tamaño fijo 12 pt (size=24)
+      // Definí una columna para el texto (2 pulgadas = 2880 twips)
+      // Podés ajustar a gusto: 2160 (1.5"), 2520 (1.75"), 2880 (2"), 3240 (2.25"), etc.
+      const TAB_POS = 2880;
+
       docParagraphs.push(
-        new Paragraph({ children: [new TextRun({ text: hora, size: 24 })] }),
+        // Hora (si la querés también con 12 pt y negrita)
         new Paragraph({
-          children: [new TextRun({ text: hablante, size: 24 })],
+          children: [new TextRun({ text: hora, size: 24, bold: true })],
         }),
-        new Paragraph({ children: [new TextRun({ text: texto, size: 24 })] })
+
+        // Hablante + TAB + Texto, con tab stop y hanging indent
+        new Paragraph({
+          tabStops: [{ type: TabStopType.LEFT, position: TAB_POS }],
+          indent: { left: TAB_POS, hanging: TAB_POS },
+          children: [
+            new TextRun({ text: hablante + ":", size: 24, bold: true }),
+            new TextRun({ text: "\t", size: 24 }), // tabulación a TAB_POS
+            new TextRun({ text: texto, size: 24 }), // el texto arranca en TAB_POS
+          ],
+        }),
+
+        // Renglón vacío
+        new Paragraph({ text: "" })
       );
 
       const tParas1 = Date.now();
