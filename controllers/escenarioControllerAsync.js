@@ -6,7 +6,7 @@ const { spawn } = require("child_process");
 const { Document, Packer, Paragraph, TextRun } = require("docx");
 const { createJob, getJob } = require("../queue/jobQueue");
 
-const FFMPEG_BIN = process.env.FFMPEG_BIN || "ffmpeg";
+const FFMPEG_BIN = "/usr/bin/ffmpeg";
 
 // Ruta del whisper: primero toma la var de entorno, si no usa un default por SO.
 const DEFAULT_WHISPER = {
@@ -16,10 +16,9 @@ const DEFAULT_WHISPER = {
   darwin: "/opt/homebrew/bin/whisper",
 };
 
-const WHISPER_BIN =
-  process.env.WHISPER_BIN || DEFAULT_WHISPER[process.platform] || "whisper";
+const WHISPER_BIN = "/home/administrator/whisper_env/bin/whisper";
 
-const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
+const WHISPER_MODEL_DIR = "/opt/homebrew/bin/whisper";
 
 // Preprocesa el WAV: mono, 16 kHz, normaliza y filtra para mejorar inteligibilidad
 function preprocessWav(originalWavPath) {
