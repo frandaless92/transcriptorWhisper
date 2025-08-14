@@ -71,6 +71,12 @@ function preprocessWav(originalWavPath) {
 // runner seguro cross-platform (sin comillas raras)
 function runWhisperAsync(wavPath, outDir) {
   return new Promise((resolve, reject) => {
+    console.log("=== INICIANDO TRANSCRIPCIÓN ===");
+    console.log("WAV:", wavPath);
+    console.log("Directorio salida:", outDir);
+    console.log("Whisper bin:", WHISPER_BIN);
+    console.log("Model dir:", WHISPER_MODEL_DIR || "(default)");
+
     const args = [
       wavPath,
       "--model",
@@ -94,14 +100,21 @@ function runWhisperAsync(wavPath, outDir) {
       args.push("--model_dir", WHISPER_MODEL_DIR);
     }
 
+    console.log("Comando:", WHISPER_BIN, args.join(" "));
+
     let errBuf = "";
     child.stderr.setEncoding("utf8");
     child.stderr.on("data", (chunk) => {
       errBuf += chunk;
+      console.error("[WHISPER ERR]", chunk.trim());
     });
 
-    child.on("error", (e) => reject(e));
+    child.on("error", (err) => {
+      console.error("❌ Error al ejecutar whisper:", err);
+      reject(err);
+    });
     child.on("close", (code) => {
+      console.log("Whisper finalizó con código:", code);
       if (code === 0) return resolve();
       // Propagamos el stderr para saber por qué falló
       const msg = errBuf?.trim() || `(sin stderr)`;
