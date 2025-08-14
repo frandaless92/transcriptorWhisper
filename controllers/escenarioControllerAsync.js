@@ -147,7 +147,7 @@ function runWhisperAsync(wavPath, outDir) {
       "False",
       "--temperature",
       "0",
-      "--beam-size",
+      "--beam_size",
       "5",
       "--output_dir",
       outDir,
