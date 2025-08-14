@@ -561,33 +561,78 @@ async function runZipJob(zipPath, update) {
       }, {});
 
       // construir párrafos
+      // ====== construir párrafos (formato de informe con separador) ======
       const tParas0 = Date.now();
+
+      // Función para limpiar contenido de Whisper y dejarlo plano
+      function limpiarTextoWhisper(txt) {
+        if (!txt) return "";
+        const sinMarcasTiempo = txt
+          .split(/\r?\n/)
+          .map((l) =>
+            l
+              .replace(
+                /^\s*\[\d{2}:\d{2}:\d{2}(?:[\.,]\d+)?\s*-->\s*\d{2}:\d{2}:\d{2}(?:[\.,]\d+)?\]\s*/,
+                ""
+              )
+              .trim()
+          )
+          .filter(Boolean)
+          .join(" ");
+        return sinMarcasTiempo.replace(/\s+/g, " ").trim();
+      }
+
+      // Forzar final ".-"
+      function finalizarConPuntoGuion(s) {
+        if (!s) return s;
+        let t = s.replace(/\s+$/, "");
+        if (/[.]\-$/.test(t)) return t;
+        t = t.replace(/[.\-–—\s]+$/, "");
+        return t + ".-";
+      }
+
+      // Uppercase consistente en español
+      const U = (s) => (s || "").toLocaleUpperCase("es-AR");
+
+      // Hora en formato HH:MM:SS
+      const horaMatch = (start || "").match(/\b(\d{2}:\d{2}:\d{2})\b/);
+      const hora = horaMatch ? horaMatch[1] : "--:--:--";
+
+      // Seleccionar “hablante”: Alias > ID > Canal N
+      let canalNum = null;
+      {
+        const m = (xmlItemPath || "").match(/Channel(\d+)/i);
+        canalNum = m ? m[1] : null;
+      }
+      const hablante = extra.IndividualAlias
+        ? U(extra.IndividualAlias)
+        : extra.UnitID
+        ? `ID ${U(String(extra.UnitID))}`
+        : canalNum
+        ? `CANAL ${canalNum}`
+        : "SIN IDENTIFICAR";
+
+      // Texto final
+      let texto = limpiarTextoWhisper(contenido);
+      if (!texto || /^\[?ERROR AL TRANSCRIBIR\]?/i.test(texto)) {
+        texto = "(SIN AUDIO)";
+      }
+      texto = finalizarConPuntoGuion(U(texto));
+
+      // Agregar líneas al DOCX con tamaño fijo 12 pt (size=24)
       docParagraphs.push(
-        new Paragraph({ text: `🎧 Item: ${nombreItem}`, bold: true }),
-        new Paragraph({ text: `🕒 Inicio: ${start || "-"}`, bold: true }),
+        new Paragraph({ children: [new TextRun({ text: hora, size: 24 })] }),
         new Paragraph({
-          text: `🕒 Fin: ${extra.Stop_Time || "-"}`,
-          bold: true,
+          children: [new TextRun({ text: hablante, size: 24 })],
         }),
-        new Paragraph({
-          text: `👤 Alias: ${extra.IndividualAlias || "-"}`,
-          bold: true,
-        }),
-        new Paragraph({ text: `👤 ID: ${extra.UnitID || "-"}`, bold: true }),
-        new Paragraph({ text: `📝 Transcripción:` }),
-        ...contenido.split(/\r?\n/).map(
-          (line) =>
-            new Paragraph({
-              children: [new TextRun({ text: (line || "").trim(), size: 24 })],
-            })
-        ),
-        new Paragraph("────────────────────────────────────────────")
+        new Paragraph({ children: [new TextRun({ text: texto, size: 24 })] })
       );
+
       const tParas1 = Date.now();
       log(
-        `${nombreItem}: construir párrafos ${tParas1 - tParas0} ms (lineas=${
-          (contenido.match(/\r?\n/g) || []).length + 1
-        })`
+        `${nombreItem}: construir párrafos ${
+          tParas1 - tParas0
+        } ms (formato informe con separador)`
       );
 
       // progreso
