@@ -1,6 +1,6 @@
 "use strict";
 
-/* controllers/escenarioQueueController.js — versión corregida y robusta */
+/* controllers/escenarioQueueController.js — con FFmpeg preprocesado + Whisper */
 
 const fs = require("fs");
 const path = require("path");
@@ -27,69 +27,80 @@ function memLog(tag) {
   );
 }
 
+// ========= Config FFmpeg =========
+const DEFAULT_FFMPEG = {
+  win32: "ffmpeg.exe",
+  linux: "/usr/bin/ffmpeg",
+  darwin: "/opt/homebrew/bin/ffmpeg",
+};
+const FFMPEG_BIN =
+  process.env.FFMPEG_BIN || DEFAULT_FFMPEG[process.platform] || "ffmpeg";
+
 // ========= Config Whisper =========
-// Rutas por plataforma, con posibilidad de override por env
 const DEFAULT_WHISPER = {
   win32:
     "C:\\Users\\fglag\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\whisper.exe",
   linux: "/home/administrator/whisper_env/bin/whisper",
   darwin: "/opt/homebrew/bin/whisper",
 };
-
 const WHISPER_BIN =
   process.env.WHISPER_BIN || DEFAULT_WHISPER[process.platform] || "whisper";
-
 const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
 
-// Prompt ASCII-safe (evita comillas “tipográficas” y guiones largos)
 const INITIAL_PROMPT_ASCII =
   "Audio de comunicaciones de radio policiales. Usar abreviaturas y codigo Q. " +
-  "Abreviaturas/siglas" +
+  "Correccion importante: si se escucha 'y radio parte', transcribir 'irradio parte'. " +
+  "Abreviaturas/siglas: CPM (Central de Policia Metropolitana), S.I. (Servicio de Inteligencia), " +
+  "LRRP, movil, patrulla, operativo, frecuencia segura, en transito, cambio y fuera. " +
   "Codigo Q frecuente: QSL, QRV, QTH, QRM, QRX, QRT, QRP, QRO, QSY, QSA, QSB, QTC, QTR.";
 
-// Permite desactivar el prompt por env (diagnostico/flexibilidad)
 const USE_INITIAL_PROMPT =
   String(process.env.WHISPER_USE_PROMPT || "true").toLowerCase() !== "false";
 
-// ========= Invocacion robusta de Whisper (captura stdout/stderr, UTF-8 forzado) =========
-function runWhisperAsync(wavPath, outDir) {
+// ========= Entorno base para subprocesos =========
+function baseEnv() {
+  return {
+    ...process.env,
+    PATH: `/usr/bin:/bin:/usr/local/bin:${process.env.PATH || ""}`,
+    LANG: process.env.LANG || "en_US.UTF-8",
+    LC_ALL: process.env.LC_ALL || "en_US.UTF-8",
+    PYTHONUTF8: "1",
+  };
+}
+
+// ========= FFmpeg: preprocesar a WAV mono 16k PCM s16le =========
+function preprocessAudioAsync(inputPath, outDir) {
   return new Promise((resolve, reject) => {
+    const base = path.basename(inputPath, path.extname(inputPath));
+    const sanitizedPath = path.join(outDir, `${base}.san.wav`);
+
+    // Argumentos conservadores y portables:
     const args = [
-      wavPath,
-      "--model",
-      // Podés cambiar a "large-v3" si lo tenés disponible; acá dejamos "large" por compatibilidad.
-      process.env.WHISPER_MODEL || "large-v3",
-      "--language",
-      process.env.WHISPER_LANG || "Spanish",
-      "--fp16",
-      "False",
-      "--output_dir",
-      outDir,
-      "--output_format",
-      "txt",
+      "-hide_banner",
+      "-nostdin",
+      "-loglevel",
+      "error",
+      "-y", // overwrite
+      "-i",
+      inputPath, // input
+      "-vn",
+      "-sn",
+      "-dn", // sin video/sub/ data
+      "-map_metadata",
+      "-1", // sin metadata
+      "-ac",
+      "1", // mono
+      "-ar",
+      "16000", // 16 kHz
+      "-c:a",
+      "pcm_s16le", // PCM 16-bit
+      sanitizedPath,
     ];
 
-    // if (USE_INITIAL_PROMPT) {
-    //   args.push("--initial_prompt", INITIAL_PROMPT_ASCII);
-    // }
-    // if (WHISPER_MODEL_DIR) {
-    //   args.push("--model_dir", WHISPER_MODEL_DIR);
-    // }
-
-    // Aseguramos PATH y locale UTF-8 (muy importante en servicios systemd)
-    const env = {
-      ...process.env,
-      PATH: `/usr/bin:/bin:/usr/local/bin:${process.env.PATH || ""}`,
-      LANG: process.env.LANG || "en_US.UTF-8",
-      LC_ALL: process.env.LC_ALL || "en_US.UTF-8",
-      PYTHONUTF8: "1",
-    };
-
-    log("Invocando Whisper:", WHISPER_BIN, args.join(" "));
-
-    const child = spawn(WHISPER_BIN, args, {
+    log("Invocando FFmpeg:", FFMPEG_BIN, args.join(" "));
+    const child = spawn(FFMPEG_BIN, args, {
       stdio: ["ignore", "pipe", "pipe"],
-      env,
+      env: baseEnv(),
     });
 
     let stderr = "";
@@ -98,7 +109,70 @@ function runWhisperAsync(wavPath, outDir) {
     child.stdout?.on("data", (d) => {
       const s = d.toString();
       stdout += s;
-      // Si querés menos ruido, comentá el log siguiente:
+      log("[FFMPEG:STDOUT]", s.trim());
+    });
+    child.stderr?.on("data", (d) => {
+      const s = d.toString();
+      stderr += s;
+      logErr("[FFMPEG:STDERR]", s.trim());
+    });
+
+    child.on("error", (err) => {
+      logErr("Falló spawn ffmpeg:", err?.message || err);
+      reject(err);
+    });
+
+    child.on("close", (code) => {
+      if (code === 0) {
+        resolve(sanitizedPath);
+      } else {
+        const msg = `FFmpeg salió con código ${code}. STDERR:\n${stderr}`;
+        logErr(msg);
+        reject(new Error(msg));
+      }
+    });
+  });
+}
+
+// ========= Whisper: transcribir =========
+function runWhisperAsync(wavPath, outDir) {
+  return new Promise((resolve, reject) => {
+    const args = [
+      wavPath,
+      "--model",
+      process.env.WHISPER_MODEL || "large-v3",
+      "--language",
+      process.env.WHISPER_LANG || "Spanish",
+      "--fp16",
+      "False",
+      "--temperature",
+      "0",
+      "--beam-size",
+      "5",
+      "--output_dir",
+      outDir,
+      "--output_format",
+      "txt",
+    ];
+    if (USE_INITIAL_PROMPT) {
+      args.push("--initial_prompt", INITIAL_PROMPT_ASCII);
+    }
+    // if (WHISPER_MODEL_DIR) {
+    //   args.push("--model_dir", WHISPER_MODEL_DIR);
+    // }
+
+    log("Invocando Whisper:", WHISPER_BIN, args.join(" "));
+    const child = spawn(WHISPER_BIN, args, {
+      stdio: ["ignore", "pipe", "pipe"],
+      env: baseEnv(),
+    });
+
+    let stderr = "";
+    let stdout = "";
+
+    child.stdout?.on("data", (d) => {
+      const s = d.toString();
+      stdout += s;
       log("[WHISPER:STDOUT]", s.trim());
     });
 
@@ -117,7 +191,7 @@ function runWhisperAsync(wavPath, outDir) {
       if (code === 0) {
         resolve();
       } else {
-        const msg = `Whisper salio con codigo ${code}. STDERR:\n${stderr}`;
+        const msg = `Whisper salió con código ${code}. STDERR:\n${stderr}`;
         logErr(msg);
         reject(new Error(msg));
       }
@@ -157,8 +231,6 @@ function findFileRecursive(baseDir, targetNamesLower = ["scenario.xml"]) {
 }
 
 // ========= Handlers HTTP (cola) =========
-
-// Encola el zip y devuelve jobId
 async function encolarZip(req, res) {
   try {
     if (!req.file) {
@@ -184,7 +256,6 @@ async function encolarZip(req, res) {
   }
 }
 
-// Consulta estado por jobId
 async function estadoZip(req, res) {
   const { jobId } = req.params;
   const job = getJob(jobId);
@@ -206,7 +277,7 @@ async function estadoZip(req, res) {
   return res.json(resp);
 }
 
-// ========= Runner del trabajo (ejecuta en el worker de la cola) =========
+// ========= Runner del trabajo =========
 async function runZipJob(zipPath, update) {
   let itemsDone = 0;
 
@@ -342,13 +413,12 @@ async function runZipJob(zipPath, update) {
 
       const archivo = audio?.WaveFileName?.[0] || "-";
       const itemBaseDir = path.dirname(xmlItemPath);
-      const wavPath = path.join(itemBaseDir, archivo);
+      const wavPathOriginal = path.join(itemBaseDir, archivo);
       const txtPath = path.join(itemBaseDir, archivo.replace(/\.\w+$/, ".txt"));
 
-      log(`${nombreItem}: WAV=${wavPath}`);
+      log(`${nombreItem}: WAV original=${wavPathOriginal}`);
 
-      // transcribir si es necesario
-      if (!fs.existsSync(wavPath)) {
+      if (!fs.existsSync(wavPathOriginal)) {
         logErr(`${nombreItem}: WAV no encontrado, escribo TXT de error`);
         try {
           fs.writeFileSync(
@@ -356,18 +426,55 @@ async function runZipJob(zipPath, update) {
             "[ERROR AL TRANSCRIBIR] (WAV no encontrado)"
           );
         } catch {}
-      } else if (!fs.existsSync(txtPath)) {
-        try {
-          await runWhisperAsync(wavPath, itemBaseDir);
-          log(`${nombreItem}: Whisper OK`);
-        } catch (e) {
-          logErr(`${nombreItem}: Whisper FALLÓ ::`, e?.message || e);
-          try {
-            fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR]");
-          } catch {}
-        }
       } else {
-        log(`${nombreItem}: TXT ya existía, no re-transcribo`);
+        // (A) Preprocesar con FFmpeg -> genera .san.wav
+        let wavSanitizado = null;
+        try {
+          const tF0 = Date.now();
+          wavSanitizado = await preprocessAudioAsync(
+            wavPathOriginal,
+            itemBaseDir
+          );
+          const tF1 = Date.now();
+          log(
+            `${nombreItem}: FFmpeg sanitizado OK en ${
+              tF1 - tF0
+            } ms -> ${wavSanitizado}`
+          );
+        } catch (e) {
+          logErr(`${nombreItem}: FFmpeg FALLÓ ::`, e?.message || e);
+          // Si falló el san, intentamos igual con el original
+          wavSanitizado = wavPathOriginal;
+        }
+
+        // (B) Si no hay TXT, transcribir con Whisper usando el WAV sanitizado
+        if (!fs.existsSync(txtPath)) {
+          try {
+            const tW0 = Date.now();
+            await runWhisperAsync(wavSanitizado, itemBaseDir);
+            const tW1 = Date.now();
+            log(`${nombreItem}: Whisper OK en ${tW1 - tW0} ms`);
+          } catch (e) {
+            logErr(`${nombreItem}: Whisper FALLÓ ::`, e?.message || e);
+            try {
+              fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR]");
+            } catch {}
+          }
+        } else {
+          log(`${nombreItem}: TXT ya existía, no re-transcribo`);
+        }
+
+        // (C) Limpieza opcional del .san.wav
+        try {
+          if (
+            wavSanitizado &&
+            wavSanitizado !== wavPathOriginal &&
+            fs.existsSync(wavSanitizado)
+          ) {
+            fs.unlinkSync(wavSanitizado);
+            log(`${nombreItem}: .san.wav eliminado`);
+          }
+        } catch {}
       }
 
       // leer txt
@@ -491,7 +598,6 @@ async function runZipJob(zipPath, update) {
       mensaje: "Escenario transcripto completamente",
     };
   } catch (e) {
-    // no borro workDir para inspección en caso de error
     logErr("runZipJob ERROR:", e?.stack || e?.message || e);
     throw e;
   }
