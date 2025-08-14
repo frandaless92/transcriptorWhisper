@@ -94,12 +94,18 @@ function runWhisperAsync(wavPath, outDir) {
       args.push("--model_dir", WHISPER_MODEL_DIR);
     }
 
-    const child = spawn(WHISPER_BIN, args, { stdio: "ignore" });
+    let errBuf = "";
+    child.stderr.setEncoding("utf8");
+    child.stderr.on("data", (chunk) => {
+      errBuf += chunk;
+    });
 
-    child.on("error", reject);
+    child.on("error", (e) => reject(e));
     child.on("close", (code) => {
-      if (code === 0) resolve();
-      else reject(new Error(`Whisper salió con código ${code}`));
+      if (code === 0) return resolve();
+      // Propagamos el stderr para saber por qué falló
+      const msg = errBuf?.trim() || `(sin stderr)`;
+      reject(new Error(`Whisper salió con código ${code}. STDERR:\n${msg}`));
     });
   });
 }
