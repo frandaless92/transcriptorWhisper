@@ -44,9 +44,7 @@ const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
 // Prompt ASCII-safe (evita comillas “tipográficas” y guiones largos)
 const INITIAL_PROMPT_ASCII =
   "Audio de comunicaciones de radio policiales. Usar abreviaturas y codigo Q. " +
-  "Correccion importante: si se escucha 'y radio parte', transcribir 'irradio parte'. " +
-  "Abreviaturas/siglas: CPM (Central de Policia Metropolitana), S.I. (Servicio de Inteligencia), " +
-  "LRRP, movil, patrulla, operativo, frecuencia segura, en transito, cambio y fuera. " +
+  "Abreviaturas/siglas" +
   "Codigo Q frecuente: QSL, QRV, QTH, QRM, QRX, QRT, QRP, QRO, QSY, QSA, QSB, QTC, QTR.";
 
 // Permite desactivar el prompt por env (diagnostico/flexibilidad)
@@ -60,21 +58,23 @@ function runWhisperAsync(wavPath, outDir) {
       wavPath,
       "--model",
       // Podés cambiar a "large-v3" si lo tenés disponible; acá dejamos "large" por compatibilidad.
-      process.env.WHISPER_MODEL || "large",
+      process.env.WHISPER_MODEL || "large-v3",
       "--language",
       process.env.WHISPER_LANG || "Spanish",
+      "--fp16",
+      "False",
       "--output_dir",
       outDir,
       "--output_format",
       "txt",
     ];
 
-    if (USE_INITIAL_PROMPT) {
-      args.push("--initial_prompt", INITIAL_PROMPT_ASCII);
-    }
-    if (WHISPER_MODEL_DIR) {
-      args.push("--model_dir", WHISPER_MODEL_DIR);
-    }
+    // if (USE_INITIAL_PROMPT) {
+    //   args.push("--initial_prompt", INITIAL_PROMPT_ASCII);
+    // }
+    // if (WHISPER_MODEL_DIR) {
+    //   args.push("--model_dir", WHISPER_MODEL_DIR);
+    // }
 
     // Aseguramos PATH y locale UTF-8 (muy importante en servicios systemd)
     const env = {
