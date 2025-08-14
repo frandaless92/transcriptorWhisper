@@ -417,6 +417,8 @@ async function runZipJob(zipPath, update) {
 
       log(`${nombreItem}: WAV original=${wavPathOriginal}`);
 
+      let wavSanitizado;
+
       if (!fs.existsSync(wavPathOriginal)) {
         logErr(`${nombreItem}: WAV no encontrado, escribo TXT de error`);
         try {
@@ -427,7 +429,7 @@ async function runZipJob(zipPath, update) {
         } catch {}
       } else {
         // (A) Preprocesar con FFmpeg -> genera .san.wav
-        let wavSanitizado = null;
+        wavSanitizado = null;
         try {
           const tF0 = Date.now();
           wavSanitizado = await preprocessAudioAsync(
