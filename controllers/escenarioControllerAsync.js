@@ -7,7 +7,14 @@ const path = require("path");
 const xml2js = require("xml2js");
 const AdmZip = require("adm-zip");
 const { spawn } = require("child_process");
-const { Document, Packer, Paragraph, TextRun, TabStopType } = require("docx");
+const {
+  Document,
+  Packer,
+  Paragraph,
+  TextRun,
+  TabStopType,
+  AlignmentType,
+} = require("docx");
 const { createJob, getJob } = require("../queue/jobQueue");
 
 // ========= Helpers de logging =========
@@ -594,9 +601,24 @@ async function runZipJob(zipPath, update) {
       // Uppercase consistente en español
       const U = (s) => (s || "").toLocaleUpperCase("es-AR");
 
+      // Helper robusto: extrae HH:MM:SS sin crear Date
+      function horaDeTexto(s) {
+        if (!s) return "--:--:--";
+        s = String(s);
+
+        // Caso "HH:MM:SS" (con o sin milisegundos)
+        let m = s.match(/\b(\d{2}):(\d{2}):(\d{2})(?:[.,]\d+)?\b/);
+        if (m) return `${m[1]}:${m[2]}:${m[3]}`;
+
+        // Caso "HH-MM-SS"
+        m = s.match(/\b(\d{2})-(\d{2})-(\d{2})\b/);
+        if (m) return `${m[1]}:${m[2]}:${m[3]}`;
+
+        return "--:--:--";
+      }
+
       // Hora en formato HH:MM:SS
-      const horaMatch = (start || "").match(/\b(\d{2}:\d{2}:\d{2})\b/);
-      const hora = horaMatch ? horaMatch[1] : "--:--:--";
+      const hora = horaDeTexto(start);
 
       // Seleccionar “hablante”: Alias > ID > Canal N
       let canalNum = null;
@@ -638,6 +660,7 @@ async function runZipJob(zipPath, update) {
             new TextRun({ text: "\t", size: 24 }), // tabulación a TAB_POS
             new TextRun({ text: texto, size: 24 }), // el texto arranca en TAB_POS
           ],
+          alignment: AlignmentType.JUSTIFIED,
         }),
 
         // Renglón vacío
