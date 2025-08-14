@@ -6,8 +6,6 @@ const { spawn } = require("child_process");
 const { Document, Packer, Paragraph, TextRun } = require("docx");
 const { createJob, getJob } = require("../queue/jobQueue");
 
-const FFMPEG_BIN = "/usr/bin/ffmpeg";
-
 // Ruta del whisper: primero toma la var de entorno, si no usa un default por SO.
 const DEFAULT_WHISPER = {
   win32:
@@ -16,66 +14,14 @@ const DEFAULT_WHISPER = {
   darwin: "/opt/homebrew/bin/whisper",
 };
 
-const WHISPER_BIN = "/home/administrator/whisper_env/bin/whisper";
+const WHISPER_BIN =
+  process.env.WHISPER_BIN || DEFAULT_WHISPER[process.platform] || "whisper";
 
-const WHISPER_MODEL_DIR = "/opt/homebrew/bin/whisper";
-
-// Preprocesa el WAV: mono, 16 kHz, normaliza y filtra para mejorar inteligibilidad
-function preprocessWav(originalWavPath) {
-  return new Promise((resolve, reject) => {
-    if (!fs.existsSync(originalWavPath)) {
-      return reject(new Error(`WAV no encontrado: ${originalWavPath}`));
-    }
-
-    const dir = path.dirname(originalWavPath);
-    const ext = path.extname(originalWavPath); // .wav
-    const base = path.basename(originalWavPath, ext);
-    const cleanPath = path.join(dir, `${base}_limpio.wav`);
-
-    // Si ya existe el limpio, lo reutilizamos
-    if (fs.existsSync(cleanPath)) return resolve(cleanPath);
-
-    // Filter chain:
-    // - loudnorm: normaliza nivel
-    // - highpass=200: limpia rumbles/graves
-    // - lowpass=3000: reduce súper agudos que no aportan a la voz
-    // - dynaudnorm: mejora inteligibilidad
-    //
-    // (Opcional) silenceremove para recortar silencios:
-    // ,silenceremove=stop_periods=-1:stop_threshold=-45dB:stop_duration=0.5
-    const af = "loudnorm,highpass=f=200,lowpass=f=3000,dynaudnorm";
-
-    const args = [
-      "-y",
-      "-i",
-      originalWavPath,
-      "-ac",
-      "1",
-      "-ar",
-      "16000",
-      "-af",
-      af,
-      cleanPath,
-    ];
-
-    const ff = spawn(FFMPEG_BIN, args, { stdio: "ignore" });
-    ff.on("error", (err) => reject(new Error(`FFmpeg error: ${err.message}`)));
-    ff.on("close", (code) => {
-      if (code === 0 && fs.existsSync(cleanPath)) resolve(cleanPath);
-      else reject(new Error(`FFmpeg salió con código ${code}`));
-    });
-  });
-}
+const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
 
 // runner seguro cross-platform (sin comillas raras)
 function runWhisperAsync(wavPath, outDir) {
   return new Promise((resolve, reject) => {
-    console.log("=== INICIANDO TRANSCRIPCIÓN ===");
-    console.log("WAV:", wavPath);
-    console.log("Directorio salida:", outDir);
-    console.log("Whisper bin:", WHISPER_BIN);
-    console.log("Model dir:", WHISPER_MODEL_DIR || "(default)");
-
     const args = [
       wavPath,
       "--model",
@@ -99,25 +45,12 @@ function runWhisperAsync(wavPath, outDir) {
       args.push("--model_dir", WHISPER_MODEL_DIR);
     }
 
-    console.log("Comando:", WHISPER_BIN, args.join(" "));
+    const child = spawn(WHISPER_BIN, args, { stdio: "ignore" });
 
-    let errBuf = "";
-    child.stderr.setEncoding("utf8");
-    child.stderr.on("data", (chunk) => {
-      errBuf += chunk;
-      console.error("[WHISPER ERR]", chunk.trim());
-    });
-
-    child.on("error", (err) => {
-      console.error("❌ Error al ejecutar whisper:", err);
-      reject(err);
-    });
+    child.on("error", reject);
     child.on("close", (code) => {
-      console.log("Whisper finalizó con código:", code);
-      if (code === 0) return resolve();
-      // Propagamos el stderr para saber por qué falló
-      const msg = errBuf?.trim() || `(sin stderr)`;
-      reject(new Error(`Whisper salió con código ${code}. STDERR:\n${msg}`));
+      if (code === 0) resolve();
+      else reject(new Error(`Whisper salió con código ${code}`));
     });
   });
 }
@@ -299,22 +232,10 @@ async function runZipJob(zipPath, update) {
       if (!fs.existsSync(wavPath)) {
         fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR] (WAV no encontrado)");
       } else if (!fs.existsSync(txtPath)) {
-        let cleanPath = null;
         try {
-          // 1) Preprocesar
-          cleanPath = await preprocessWav(wavPath);
-
-          // 2) Transcribir con Whisper usando el WAV limpio
-          await runWhisperAsync(cleanPath, itemBaseDir);
-        } catch (e) {
+          await runWhisperAsync(wavPath, itemBaseDir);
+        } catch {
           fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR]");
-        } finally {
-          // 3) Limpiar archivo temporal si existe
-          if (cleanPath && fs.existsSync(cleanPath)) {
-            try {
-              fs.unlinkSync(cleanPath);
-            } catch {}
-          }
         }
       }
 
