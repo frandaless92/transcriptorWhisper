@@ -665,7 +665,22 @@ async function runZipJob(zipPath, update) {
     // 6) Armar DOCX (80% -> 95%)
     update({ progress: 90 });
     const doc = new Document({
-      sections: [{ properties: {}, children: docParagraphs }],
+      sections: [
+        {
+          properties: {
+            page: {
+              margin: {
+                top: 1888, // 3,33 cm
+                bottom: 1440, // 2,54 cm
+                inside: 2403, // 4,24 cm (interior)
+                outside: 748, // 1,32 cm (exterior)
+              },
+              mirror: true, // márgenes simétricos
+            },
+          },
+          children: docParagraphs,
+        },
+      ],
     });
 
     let buffer;
