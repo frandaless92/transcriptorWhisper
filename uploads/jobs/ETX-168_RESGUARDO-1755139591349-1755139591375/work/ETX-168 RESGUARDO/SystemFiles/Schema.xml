@@ -1,0 +1,855 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Version="1">
+  <DataSources Count="2" Version="1">
+    <DataSource Id="1" Version="1">
+      <BaseFields Count="70">
+        <Field Name="Start_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Start Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Stop_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Stop Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Logger">
+          <Type>System.Int32</Type>
+          <Alias>Logger</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Channel">
+          <Type>System.Int32</Type>
+          <Alias>Channel</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Rec_Start_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Rec Start Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Rec_Stop_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Rec Stop Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Duration">
+          <Type>System.Int32</Type>
+          <Alias>Duration</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Agent_ID">
+          <Type>System.String</Type>
+          <Alias>URID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Station">
+          <Type>System.String</Type>
+          <Alias>Extension</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Trunk">
+          <Type>System.String</Type>
+          <Alias>Trunk</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Status">
+          <Type>System.String</Type>
+          <Alias>Status</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Cls_Call_Id">
+          <Type>System.Int32</Type>
+          <Alias>CLS Call ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Unit">
+          <Type>System.Int32</Type>
+          <Alias>Unit</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallHandle">
+          <Type>System.String</Type>
+          <Alias>CallHandle</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallType">
+          <Type>System.String</Type>
+          <Alias>CallType</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="EventType">
+          <Type>System.String</Type>
+          <Alias>EventType</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallPriority">
+          <Type>System.String</Type>
+          <Alias>CallPriority</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="AudioEncoding">
+          <Type>System.String</Type>
+          <Alias>AudioEncoding</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="EncryptionState">
+          <Type>System.String</Type>
+          <Alias>EncryptionState</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SecureKey">
+          <Type>System.String</Type>
+          <Alias>SecureKey</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="UnitID">
+          <Type>System.Int32</Type>
+          <Alias>UnitID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="IndividualAlias">
+          <Type>System.String</Type>
+          <Alias>IndividualAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ZoneID">
+          <Type>System.Int32</Type>
+          <Alias>ZoneID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ZoneAlias">
+          <Type>System.String</Type>
+          <Alias>ZoneAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SiteID">
+          <Type>System.Int32</Type>
+          <Alias>SiteID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SiteAlias">
+          <Type>System.String</Type>
+          <Alias>SiteAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="AudioAvailability">
+          <Type>System.String</Type>
+          <Alias>AudioAvailability</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="EndOfCallReason">
+          <Type>System.String</Type>
+          <Alias>EndOfCallReason</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallShedStatus">
+          <Type>System.String</Type>
+          <Alias>CallShedStatus</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Frequency">
+          <Type>System.String</Type>
+          <Alias>Frequency</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="FrequencyAlias">
+          <Type>System.String</Type>
+          <Alias>FrequencyAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="PrivateLineCode">
+          <Type>System.String</Type>
+          <Alias>PrivateLineCode</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="PrivateLineAlias">
+          <Type>System.String</Type>
+          <Alias>PrivateLineAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SecureKeyAlias">
+          <Type>System.String</Type>
+          <Alias>SecureKeyAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="RadioStatusAlias">
+          <Type>System.String</Type>
+          <Alias>RadioStatusAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="vcArchivePath">
+          <Type>System.String</Type>
+          <Alias>vcArchivePath</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="iArchiveIdHigh">
+          <Type>System.Int32</Type>
+          <Alias>iArchiveIdHigh</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="iArchiveIdLow">
+          <Type>System.Int32</Type>
+          <Alias>iArchiveIdLow</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="iArchiveClass">
+          <Type>System.Int32</Type>
+          <Alias>iArchiveClass</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="vcScServerId">
+          <Type>System.String</Type>
+          <Alias>vcScServerId</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="vcArchiveUniqueId">
+          <Type>System.String</Type>
+          <Alias>vcArchiveUniqueId</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Agent_Name">
+          <Type>System.String</Type>
+          <Alias>Resource Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Recorded">
+          <Type>System.String</Type>
+          <Alias>Recorded</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TargetIndividualAlias">
+          <Type>System.String</Type>
+          <Alias>TargetIndividualAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="NetworkID">
+          <Type>System.String</Type>
+          <Alias>Network ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SystemID">
+          <Type>System.String</Type>
+          <Alias>System ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ForeignSystemAlias">
+          <Type>System.String</Type>
+          <Alias>Foreign System Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ConsoleNetworkID">
+          <Type>System.String</Type>
+          <Alias>Console Network ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ConsoleSystemID">
+          <Type>System.String</Type>
+          <Alias>Console System ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ForeignConsoleSystemAlias">
+          <Type>System.String</Type>
+          <Alias>Foreign Console System Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="KeysetID">
+          <Type>System.String</Type>
+          <Alias>Keyset ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="KeysetAlias">
+          <Type>System.String</Type>
+          <Alias>Keyset Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="UnitIDString">
+          <Type>System.String</Type>
+          <Alias>Unit ID String</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TextMessageID">
+          <Type>System.Int32</Type>
+          <Alias>Text Message ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TextBody">
+          <Type>System.String</Type>
+          <Alias>Group Text Message</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="GroupTextAddress">
+          <Type>System.String</Type>
+          <Alias>Group Text Address</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="GroupTextMessageDisplay">
+          <Type>System.String</Type>
+          <Alias>Group Text Message Display</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TargetUnitIDString">
+          <Type>System.String</Type>
+          <Alias>Target Unit ID String</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Call_ID">
+          <Type>System.Int32</Type>
+          <Alias>Call_ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Call_Index">
+          <Type>System.Int32</Type>
+          <Alias>Call_Index</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ParentClsCallId">
+          <Type>System.Int32</Type>
+          <Alias>ParentClsCallId</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Phone_Number">
+          <Type>System.String</Type>
+          <Alias>Phone_Number</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Dialed_In">
+          <Type>System.String</Type>
+          <Alias>Dialed_In</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TargetUnitID">
+          <Type>System.Int32</Type>
+          <Alias>TargetUnitID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ConvTalkgroupID">
+          <Type>System.String</Type>
+          <Alias>ConvTalkgroupID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Duration_HiRes">
+          <Type>System.Int32</Type>
+          <Alias>Duration_hires</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TrunkGroup_ID">
+          <Type>System.String</Type>
+          <Alias>Trunk Group Id</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TrunkGroup_Name">
+          <Type>System.String</Type>
+          <Alias>Trunk Group Name</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="MediaType">
+          <Type>System.String</Type>
+          <Alias>Media Type</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="DTMF">
+          <Type>System.String</Type>
+          <Alias>DTMF</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+      </BaseFields>
+      <AniAliFields Count="0" />
+    </DataSource>
+    <DataSource Id="2" Version="1">
+      <BaseFields Count="70">
+        <Field Name="Start_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Start Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Stop_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Stop Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Logger">
+          <Type>System.Int32</Type>
+          <Alias>Logger</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Channel">
+          <Type>System.Int32</Type>
+          <Alias>Channel</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Rec_Start_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Rec Start Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Rec_Stop_Time">
+          <Type>System.DateTime</Type>
+          <Alias>Rec Stop Time</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Duration">
+          <Type>System.Int32</Type>
+          <Alias>Duration</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Agent_ID">
+          <Type>System.String</Type>
+          <Alias>URID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Station">
+          <Type>System.String</Type>
+          <Alias>Extension</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Trunk">
+          <Type>System.String</Type>
+          <Alias>Trunk</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Status">
+          <Type>System.String</Type>
+          <Alias>Status</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Cls_Call_Id">
+          <Type>System.Int32</Type>
+          <Alias>CLS Call ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Unit">
+          <Type>System.Int32</Type>
+          <Alias>Unit</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallHandle">
+          <Type>System.String</Type>
+          <Alias>CallHandle</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallType">
+          <Type>System.String</Type>
+          <Alias>CallType</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="EventType">
+          <Type>System.String</Type>
+          <Alias>EventType</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallPriority">
+          <Type>System.String</Type>
+          <Alias>CallPriority</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="AudioEncoding">
+          <Type>System.String</Type>
+          <Alias>AudioEncoding</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="EncryptionState">
+          <Type>System.String</Type>
+          <Alias>EncryptionState</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SecureKey">
+          <Type>System.String</Type>
+          <Alias>SecureKey</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="UnitID">
+          <Type>System.Int32</Type>
+          <Alias>UnitID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="IndividualAlias">
+          <Type>System.String</Type>
+          <Alias>IndividualAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ZoneID">
+          <Type>System.Int32</Type>
+          <Alias>ZoneID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ZoneAlias">
+          <Type>System.String</Type>
+          <Alias>ZoneAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SiteID">
+          <Type>System.Int32</Type>
+          <Alias>SiteID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SiteAlias">
+          <Type>System.String</Type>
+          <Alias>SiteAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="AudioAvailability">
+          <Type>System.String</Type>
+          <Alias>AudioAvailability</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="EndOfCallReason">
+          <Type>System.String</Type>
+          <Alias>EndOfCallReason</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="CallShedStatus">
+          <Type>System.String</Type>
+          <Alias>CallShedStatus</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Frequency">
+          <Type>System.String</Type>
+          <Alias>Frequency</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="FrequencyAlias">
+          <Type>System.String</Type>
+          <Alias>FrequencyAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="PrivateLineCode">
+          <Type>System.String</Type>
+          <Alias>PrivateLineCode</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="PrivateLineAlias">
+          <Type>System.String</Type>
+          <Alias>PrivateLineAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SecureKeyAlias">
+          <Type>System.String</Type>
+          <Alias>SecureKeyAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="RadioStatusAlias">
+          <Type>System.String</Type>
+          <Alias>RadioStatusAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="vcArchivePath">
+          <Type>System.String</Type>
+          <Alias>vcArchivePath</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="iArchiveIdHigh">
+          <Type>System.Int32</Type>
+          <Alias>iArchiveIdHigh</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="iArchiveIdLow">
+          <Type>System.Int32</Type>
+          <Alias>iArchiveIdLow</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="iArchiveClass">
+          <Type>System.Int32</Type>
+          <Alias>iArchiveClass</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="vcScServerId">
+          <Type>System.String</Type>
+          <Alias>vcScServerId</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="vcArchiveUniqueId">
+          <Type>System.String</Type>
+          <Alias>vcArchiveUniqueId</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Agent_Name">
+          <Type>System.String</Type>
+          <Alias>Resource Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Recorded">
+          <Type>System.String</Type>
+          <Alias>Recorded</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TargetIndividualAlias">
+          <Type>System.String</Type>
+          <Alias>TargetIndividualAlias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="NetworkID">
+          <Type>System.String</Type>
+          <Alias>Network ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="SystemID">
+          <Type>System.String</Type>
+          <Alias>System ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ForeignSystemAlias">
+          <Type>System.String</Type>
+          <Alias>Foreign System Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ConsoleNetworkID">
+          <Type>System.String</Type>
+          <Alias>Console Network ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ConsoleSystemID">
+          <Type>System.String</Type>
+          <Alias>Console System ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ForeignConsoleSystemAlias">
+          <Type>System.String</Type>
+          <Alias>Foreign Console System Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="KeysetID">
+          <Type>System.String</Type>
+          <Alias>Keyset ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="KeysetAlias">
+          <Type>System.String</Type>
+          <Alias>Keyset Alias</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="UnitIDString">
+          <Type>System.String</Type>
+          <Alias>Unit ID String</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TextMessageID">
+          <Type>System.Int32</Type>
+          <Alias>Text Message ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TextBody">
+          <Type>System.String</Type>
+          <Alias>Group Text Message</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="GroupTextAddress">
+          <Type>System.String</Type>
+          <Alias>Group Text Address</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="GroupTextMessageDisplay">
+          <Type>System.String</Type>
+          <Alias>Group Text Message Display</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TargetUnitIDString">
+          <Type>System.String</Type>
+          <Alias>Target Unit ID String</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Call_ID">
+          <Type>System.Int32</Type>
+          <Alias>Call_ID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Call_Index">
+          <Type>System.Int32</Type>
+          <Alias>Call_Index</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ParentClsCallId">
+          <Type>System.Int32</Type>
+          <Alias>ParentClsCallId</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Phone_Number">
+          <Type>System.String</Type>
+          <Alias>Phone_Number</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Dialed_In">
+          <Type>System.String</Type>
+          <Alias>Dialed_In</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TargetUnitID">
+          <Type>System.Int32</Type>
+          <Alias>TargetUnitID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="ConvTalkgroupID">
+          <Type>System.String</Type>
+          <Alias>ConvTalkgroupID</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="Duration_HiRes">
+          <Type>System.Int32</Type>
+          <Alias>Duration_hires</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TrunkGroup_ID">
+          <Type>System.String</Type>
+          <Alias>Trunk Group Id</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="TrunkGroup_Name">
+          <Type>System.String</Type>
+          <Alias>Trunk Group Name</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="MediaType">
+          <Type>System.String</Type>
+          <Alias>Media Type</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+        <Field Name="DTMF">
+          <Type>System.String</Type>
+          <Alias>DTMF</Alias>
+          <Description />
+          <Category>Cls89</Category>
+        </Field>
+      </BaseFields>
+      <AniAliFields Count="0" />
+    </DataSource>
+  </DataSources>
+</Schema>

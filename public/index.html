@@ -17,7 +17,8 @@
     <nav class="navbar navbar-expand-lg border-bottom border-dark">
       <div class="container">
         <span class="navbar-brand text-light fw-semibold"
-          >🗂️ Transcriptor Whisper</span
+          >Transcripción Asistida por IA - Open IA Whisper - División
+          COMUNICACIONES TRONCALIZADAS</span
         >
       </div>
     </nav>
@@ -28,12 +29,14 @@
           <div class="card shadow-sm">
             <div class="card-body p-4">
               <h1 class="h4 mb-3">
-                Subí tu escenario <span class="badge badge-soft">.zip</span>
+                Subí tu escenario en formato
+                <span class="badge badge-soft">.zip</span>
               </h1>
               <p class="text-secondary">
-                El backend descomprime, procesa <code>scenario.xml</code> y cada
-                <code>ItemN</code>, transcribe con Whisper y genera un único
-                <strong>transcripcion.docx</strong>.
+                El servidor descomprimará el archivo, la Inteligencia Artificial
+                irá transcribiendo un audio a la vez, y procesará todos los
+                metadatos relacionados al mismo, generando finalmente un único
+                documento <strong>.docx</strong>.
               </p>
 
               <div id="dropzone" class="dropzone p-4 text-center mb-3">
@@ -103,34 +106,44 @@
         <div class="col-lg-5">
           <div class="card h-100 shadow-sm">
             <div class="card-body p-4 d-flex flex-column">
-              <h2 class="h5 mb-3">Resultado</h2>
+              <h2 class="h5 mb-3">Resultados</h2>
               <div id="resultBox" class="flex-grow-1">
                 <p class="text-secondary">
                   Acá vas a ver el enlace de descarga del
                   <strong>.docx</strong> cuando termine el proceso.
                 </p>
               </div>
+              <div class="mt-4">
+                <div
+                  class="d-flex align-items-center justify-content-between mb-2"
+                >
+                  <h5 class="h5 mb-0">Historial de trabajos</h5>
+                  <button
+                    id="btnRefreshHistorial"
+                    class="btn btn-outline-secondary btn-sm"
+                  >
+                    Actualizar
+                  </button>
+                </div>
+                <div
+                  id="historialBox"
+                  class="hist-list list-group list-group-flush"
+                ></div>
+                <div
+                  id="historialEmpty"
+                  class="text-muted small mt-2"
+                  style="display: none"
+                >
+                  No hay trabajos generados aún.
+                </div>
+              </div>
+
               <div class="mt-3 small text-secondary">
-                <strong>Nota:</strong> Este frontend funciona con tu endpoint
-                actual que responde recién cuando finaliza toda la
-                transcripción.
+                <strong>Nota:</strong> Recuerde controlar y/o corregir el
+                documento generado, la transcripción en el mismo sigue siendo su
+                responsabilidad legal y administrativa.
               </div>
             </div>
-          </div>
-
-          <div class="mt-3 small text-secondary">
-            <details>
-              <summary class="text-light">
-                ¿Querés modo asíncrono con seguimiento?
-              </summary>
-              <p class="mt-2">
-                Si más adelante migrás el backend a un flujo en 2 etapas (crear
-                trabajo → procesar en background → consultar estado por
-                <em>jobId</em>), esta UI ya contempla un módulo de
-                <code>pollStatus(jobId)</code> (comentado en el código) para
-                integrar sin rediseñar.
-              </p>
-            </details>
           </div>
         </div>
       </div>

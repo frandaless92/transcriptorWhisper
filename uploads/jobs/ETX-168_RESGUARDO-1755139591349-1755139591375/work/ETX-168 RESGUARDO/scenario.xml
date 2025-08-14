@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Scenario SavedBy="Inform" Version="2">
+  <Properties Version="1">
+    <ExportStatus>Succeeded</ExportStatus>
+    <Timezone>UTC</Timezone>
+  </Properties>
+  <Components Version="1">
+    <Preferences>SystemFiles\Preferences.xml</Preferences>
+    <Schema>SystemFiles\Schema.xml</Schema>
+    <Resources>SystemFiles\Resources.xml</Resources>
+    <RecordedItems>Recorded Items\Recorded Items.xml</RecordedItems>
+  </Components>
+</Scenario>

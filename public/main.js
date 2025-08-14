@@ -1,7 +1,15 @@
-// === CONFIG ===
-const ENDPOINT = "/escenario/cargarZip"; // Ruta donde expongas procesarZip
+/* main.js — Frontend Transcriptor */
 
-// === UI refs ===
+//
+// === Config de endpoints ===
+//
+const ENDPOINT = "/escenario/cargarZipAsync";
+const STATUS_URL = (id) => `/escenario/estado/${id}`;
+const HISTORIAL_ENDPOINT = "/escenario/historial";
+
+//
+// === Referencias a la UI ===
+//
 const dropzone = document.getElementById("dropzone");
 const fileInput = document.getElementById("fileInput");
 const btnUpload = document.getElementById("btnUpload");
@@ -11,49 +19,251 @@ const statusText = document.getElementById("statusText");
 const fileName = document.getElementById("fileName");
 const resultBox = document.getElementById("resultBox");
 
+const historialBox = document.getElementById("historialBox");
+const historialEmpty = document.getElementById("historialEmpty");
+const btnRefreshHistorial = document.getElementById("btnRefreshHistorial");
+
+//
+// === Estado ===
+//
 let currentXHR = null;
 let selectedFile = null;
+let pollTimer = null;
+
+//
+// === Helpers de UI ===
+//
+function stopPolling() {
+  if (pollTimer) {
+    clearTimeout(pollTimer);
+    pollTimer = null;
+  }
+}
 
 function resetUI() {
+  stopPolling();
   progressBar.style.width = "0%";
   progressBar.textContent = "0%";
+  progressBar.setAttribute("aria-valuenow", "0");
   statusText.textContent = "Esperando archivo…";
   btnUpload.disabled = !selectedFile;
   btnCancel.disabled = true;
   if (!selectedFile) fileName.textContent = "";
+
+  // Mensaje base en resultados
+  resultBox.innerHTML = `
+    <p class="text-secondary">
+      Acá vas a ver el enlace de descarga del <strong>.docx</strong> cuando termine el proceso.
+    </p>
+  `;
 }
 
 function setUploadingUI() {
   btnUpload.disabled = true;
   btnCancel.disabled = false;
-  statusText.textContent = "Subiendo .zip y esperando resultado del servidor…";
+  statusText.textContent = "Subiendo .zip…";
+  resultBox.innerHTML = `
+    <div class="small text-secondary">Archivo enviado. Preparando procesamiento…</div>
+  `;
 }
 
-// Dropzone interactions
+function onError(message) {
+  stopPolling();
+  if (window.Swal) Swal.fire("Error", message, "error");
+  statusText.textContent = "Error: " + message;
+  progressBar.style.width = "0%";
+  progressBar.textContent = "0%";
+  progressBar.setAttribute("aria-valuenow", "0");
+  btnUpload.disabled = false;
+  btnCancel.disabled = true;
+}
+
+function niceState(state) {
+  const map = {
+    queued: "En cola",
+    processing: "Procesando",
+    finished: "Finalizado",
+    failed: "Falló",
+  };
+  return map[state] || state || "procesando";
+}
+
+function fmtFecha(iso) {
+  try {
+    return new Date(iso).toLocaleString("es-AR", {
+      dateStyle: "short",
+      timeStyle: "short",
+    });
+  } catch {
+    return iso || "";
+  }
+}
+
+//
+// === Historial ===
+//
+async function cargarHistorial() {
+  try {
+    historialBox.innerHTML = `<div class="small text-secondary p-2">Cargando…</div>`;
+    const r = await fetch(`${HISTORIAL_ENDPOINT}?limit=50`, {
+      cache: "no-store",
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const data = await r.json();
+    const items = Array.isArray(data.items) ? data.items : [];
+
+    historialBox.innerHTML = "";
+    if (!items.length) {
+      historialEmpty.style.display = "";
+      return;
+    }
+    historialEmpty.style.display = "none";
+
+    for (const it of items) {
+      const url = it.url.startsWith("/") ? it.url : "/" + it.url;
+      const el = document.createElement("div");
+      el.className = "hist-item list-group-item";
+
+      el.innerHTML = `
+        <div class="hist-name">
+          📄 ${it.file}
+          <div class="small-muted">Job: ${it.jobId}</div>
+        </div>
+        <div class="hist-meta">
+          <span>${it.sizeHuman || ""}</span>
+          <span>${fmtFecha(it.mtimeISO)}</span>
+          <a class="btn-download" href="${url}" download="${
+        it.file
+      }">Descargar</a>
+        </div>
+      `;
+      historialBox.appendChild(el);
+    }
+  } catch (e) {
+    historialBox.innerHTML = `<div class="text-danger small p-2">Error al cargar historial</div>`;
+  }
+}
+
+btnRefreshHistorial?.addEventListener("click", cargarHistorial);
+document.addEventListener("DOMContentLoaded", cargarHistorial);
+
+//
+// === Render del resultado final ===
+//
+function renderResult({ mensaje, archivo }) {
+  stopPolling();
+  btnCancel.disabled = true;
+  btnUpload.disabled = false;
+
+  // Normalizar href
+  let href = archivo || "";
+  if (href && !/^https?:\/\//i.test(href)) {
+    href = href.startsWith("/") ? href : "/" + href;
+  }
+
+  resultBox.innerHTML = `
+    <div class="alert alert-dark" role="alert">
+      <div class="mb-2">${mensaje || "Proceso finalizado."}</div>
+      ${
+        href
+          ? `<a class="btn btn-success btn-sm" href="${href}" download>
+               ⬇️ Descargar transcripción
+             </a>`
+          : `<div class="text-warning">El backend no devolvió una ruta descargable.</div>`
+      }
+    </div>
+  `;
+
+  // refrescar historial al terminar
+  cargarHistorial();
+}
+
+//
+// === Poll de estado ===
+//
+async function pollStatus(jobId) {
+  try {
+    const r = await fetch(STATUS_URL(jobId), { cache: "no-store" });
+    if (!r.ok) throw new Error(`Estado HTTP ${r.status}`);
+    const data = await r.json();
+
+    // % seguro (0–100)
+    if (typeof data.progress === "number") {
+      const pct = Math.max(0, Math.min(100, Math.round(data.progress)));
+      progressBar.style.width = pct + "%";
+      progressBar.textContent = pct + "%";
+      progressBar.setAttribute("aria-valuenow", String(pct));
+    }
+
+    // estado + conteo (si viene)
+    if (
+      Number.isFinite(data.itemsDone) &&
+      Number.isFinite(data.totalItems) &&
+      data.totalItems > 0
+    ) {
+      statusText.textContent = `Estado: ${niceState(data.state)} — Audios: ${
+        data.itemsDone
+      }/${data.totalItems}`;
+    } else {
+      statusText.textContent = `Estado: ${niceState(data.state)}`;
+    }
+
+    // terminales
+    if (data.state === "finished") {
+      if (data.archivo) {
+        renderResult({ mensaje: data.mensaje || "OK", archivo: data.archivo });
+      } else {
+        onError("Trabajo finalizado pero sin archivo disponible.");
+      }
+      return;
+    }
+    if (data.state === "failed") {
+      onError(data.error || "Falló el procesamiento");
+      return;
+    }
+
+    // seguir consultando
+    stopPolling();
+    pollTimer = setTimeout(() => pollStatus(jobId), 3000);
+  } catch (e) {
+    // backoff suave
+    stopPolling();
+    pollTimer = setTimeout(() => pollStatus(jobId), 5000);
+  }
+}
+
+//
+// === Dropzone & carga ===
+//
 dropzone.addEventListener("click", () => fileInput.click());
+
 dropzone.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropzone.classList.add("dragover");
 });
-dropzone.addEventListener("dragleave", () =>
-  dropzone.classList.remove("dragover")
-);
+
+dropzone.addEventListener("dragleave", () => {
+  dropzone.classList.remove("dragover");
+});
+
 dropzone.addEventListener("drop", (e) => {
   e.preventDefault();
   dropzone.classList.remove("dragover");
   if (e.dataTransfer.files && e.dataTransfer.files[0]) {
     const file = e.dataTransfer.files[0];
     if (!file.name.toLowerCase().endsWith(".zip")) {
-      Swal.fire(
-        "Formato inválido",
-        "Por favor subí un archivo .zip",
-        "warning"
-      );
+      window.Swal &&
+        Swal.fire(
+          "Formato inválido",
+          "Por favor subí un archivo .zip",
+          "warning"
+        );
       return;
     }
     selectedFile = file;
-    fileName.textContent =
-      file.name + " (" + Math.round(file.size / 1024 / 1024) + " MB)";
+    fileName.textContent = `${file.name} (${Math.round(
+      file.size / 1024 / 1024
+    )} MB)`;
     btnUpload.disabled = false;
     statusText.textContent = "Listo para subir.";
   }
@@ -63,61 +273,82 @@ fileInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
   if (!file.name.toLowerCase().endsWith(".zip")) {
-    Swal.fire("Formato inválido", "Por favor subí un archivo .zip", "warning");
+    window.Swal &&
+      Swal.fire(
+        "Formato inválido",
+        "Por favor subí un archivo .zip",
+        "warning"
+      );
     fileInput.value = "";
     return;
   }
   selectedFile = file;
-  fileName.textContent =
-    file.name + " (" + Math.round(file.size / 1024 / 1024) + " MB)";
+  fileName.textContent = `${file.name} (${Math.round(
+    file.size / 1024 / 1024
+  )} MB)`;
   btnUpload.disabled = false;
   statusText.textContent = "Listo para subir.";
 });
 
-// Upload handler (XMLHttpRequest para mostrar progreso de subida)
-btnUpload.addEventListener("click", async () => {
+btnUpload.addEventListener("click", () => {
   if (!selectedFile) return;
   setUploadingUI();
 
   const formData = new FormData();
-  formData.append("archivo", selectedFile);
+  formData.append("archivo", selectedFile); // <- campo de multer
 
   currentXHR = new XMLHttpRequest();
   currentXHR.open("POST", ENDPOINT, true);
 
+  // progreso de subida
   currentXHR.upload.onprogress = function (e) {
     if (e.lengthComputable) {
       const percent = Math.round((e.loaded / e.total) * 100);
       progressBar.style.width = percent + "%";
       progressBar.textContent = percent + "%";
+      progressBar.setAttribute("aria-valuenow", String(percent));
       statusText.textContent = "Subiendo… " + percent + "%";
     }
   };
 
+  // respuesta del POST
   currentXHR.onreadystatechange = function () {
     if (currentXHR.readyState === 4) {
+      // ya no hay upload en curso
       btnCancel.disabled = true;
+
       if (currentXHR.status >= 200 && currentXHR.status < 300) {
+        let resp;
         try {
-          const resp = JSON.parse(currentXHR.responseText);
-          // resp: { mensaje, archivo }
-          statusText.textContent = "Completado";
-          progressBar.style.width = "100%";
-          progressBar.textContent = "100%";
+          resp = JSON.parse(currentXHR.responseText || "{}");
+        } catch {
+          onError("Respuesta del servidor no es JSON");
+          return;
+        }
+
+        if (resp.jobId) {
+          statusText.textContent = "Trabajo encolado. Procesando…";
+          // reset un poco la barra si quedó en 100% de subida
+          if (progressBar.textContent === "100%") {
+            progressBar.style.width = "15%";
+            progressBar.textContent = "15%";
+            progressBar.setAttribute("aria-valuenow", "15");
+          }
+          pollStatus(resp.jobId);
+        } else if (resp.archivo) {
+          // compat con endpoint síncrono
           renderResult(resp);
-          Swal.fire("Listo", "Escenario transcripto correctamente", "success");
-        } catch (err) {
-          onError("Respuesta inválida del servidor");
+        } else {
+          onError("Respuesta inesperada del servidor");
         }
       } else {
+        let msg = "Error " + currentXHR.status;
         try {
-          const err = JSON.parse(currentXHR.responseText);
-          onError(err.error || "Error en el procesamiento");
-        } catch (_) {
-          onError("Error en el procesamiento");
-        }
+          const j = JSON.parse(currentXHR.responseText || "{}");
+          if (j && j.error) msg = j.error;
+        } catch {}
+        onError(msg);
       }
-      currentXHR = null;
     }
   };
 
@@ -136,66 +367,13 @@ btnCancel.addEventListener("click", () => {
   if (currentXHR) {
     currentXHR.abort();
     currentXHR = null;
-    Swal.fire("Cancelado", "Se canceló la subida del archivo.", "info");
+    window.Swal &&
+      Swal.fire("Cancelado", "Se canceló la subida del archivo.", "info");
     resetUI();
   }
 });
 
-function onError(message) {
-  Swal.fire("Error", message, "error");
-  statusText.textContent = "Error: " + message;
-  progressBar.style.width = "0%";
-  progressBar.textContent = "0%";
-  btnUpload.disabled = false;
-  btnCancel.disabled = true;
-}
-
-function renderResult({ mensaje, archivo }) {
-  // Intenta construir un enlace descargable si el backend sirve /uploads como estático.
-  // Si "archivo" ya es una URL absoluta, la usa tal cual.
-  let href = archivo;
-  if (archivo && !/^https?:\/\//i.test(archivo)) {
-    // Normalizar: si el backend devuelve "uploads/..."
-    if (archivo.startsWith("uploads")) {
-      href = "/" + archivo.replace(/^\/+/, "");
-    }
-  }
-
-  resultBox.innerHTML = `
-          <div class="alert alert-dark" role="alert">
-            <div class="mb-1">${mensaje || "Proceso finalizado."}</div>
-            ${
-              href
-                ? `
-              <a class="btn btn-success btn-sm" href="${href}" download>
-                ⬇️ Descargar transcripcion.docx
-              </a>
-              <div class="small mt-2 text-secondary">Ruta del archivo: <code>${archivo}</code></div>
-            `
-                : `
-              <div class="text-warning">El backend no devolvió una ruta descargable. Ver consola/servidor.</div>
-            `
-            }
-          </div>
-        `;
-}
-
-// Ejemplo de integración futura (backend asíncrono con jobId):
-/*
-      async function pollStatus(jobId) {
-        const interval = 3000;
-        const timer = setInterval(async () => {
-          const r = await fetch(`/api/estado/${jobId}`);
-          const data = await r.json();
-          // data: { state: 'queued'|'processing'|'finished'|'failed', progress: 0-100, archivo? }
-          progressBar.style.width = (data.progress||0) + '%';
-          progressBar.textContent = (data.progress||0) + '%';
-          statusText.textContent = `Estado: ${data.state}…`;
-          if (data.state === 'finished') { clearInterval(timer); renderResult(data); }
-          if (data.state === 'failed') { clearInterval(timer); onError('Falló el procesamiento'); }
-        }, interval);
-      }
-      */
-
-// Init
+//
+// === Arranque ===
+//
 resetUI();

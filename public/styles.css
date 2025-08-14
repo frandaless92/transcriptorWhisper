@@ -41,3 +41,66 @@ a {
 code {
   color: #c5b3ff;
 }
+
+/* Historial compacto */
+.hist-list {
+  max-height: 280px; /* hace el listado más chico */
+  overflow: auto; /* scroll si crece */
+  border: 1px solid #23232d;
+  border-radius: 10px;
+  background: #14141b;
+}
+
+.hist-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #22222c;
+}
+.hist-item:last-child {
+  border-bottom: 0;
+}
+
+.hist-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #e9e9ee;
+}
+
+.hist-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.8rem;
+  color: #a8a8c2;
+}
+
+.hist-item:hover {
+  background: #191923;
+}
+
+.btn-download {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  background: var(--accent);
+  border: 0;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.small-muted {
+  color: #a8a8c2;
+  font-size: 0.8rem;
+}
+
+.h4,
+.h5 {
+  color: lightgray !important;
+}

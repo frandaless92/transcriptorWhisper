@@ -1,0 +1,1309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SystemInfo>
+  <ClientSystem>
+    <Application Version="1">
+      <Product>NICE Inform</Product>
+      <ProductVersion>unknown</ProductVersion>
+      <Username>unknown</Username>
+      <LoginName>unknown</LoginName>
+      <ApplicationPath>C:\Program Files (x86)\NICE Systems\NICE Inform\NICE Inform Client\ClientApps\NiceInform.exe</ApplicationPath>
+    </Application>
+    <Machine>
+      <MachineName>Z001S001LRS02</MachineName>
+      <OSVersion>Microsoft Windows NT 6.1.7601 Service Pack 1</OSVersion>
+      <VirtualMemory>648364032 bytes</VirtualMemory>
+      <CLR>4.0.30319.34209</CLR>
+      <Drives>
+        <Drive Name="C:\">
+          <VolumeName></VolumeName>
+          <Format>NTFS</Format>
+          <FreeDiskSpace>183,88 GB</FreeDiskSpace>
+          <TotalDiskSpace>232,88 GB</TotalDiskSpace>
+        </Drive>
+        <Drive Name="D:\">
+          <VolumeName></VolumeName>
+          <Format>NTFS</Format>
+          <FreeDiskSpace>232,63 GB</FreeDiskSpace>
+          <TotalDiskSpace>232,88 GB</TotalDiskSpace>
+        </Drive>
+      </Drives>
+    </Machine>
+    <Modules>
+      <Company Name="NICE Systems Ltd.">
+        <Module Name="NiceInform.exe">
+          <Version>7.0.3716.53</Version>
+          <Product>NICE Inform</Product>
+          <ProductVersion>7.0.3716.53</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Program Files (x86)\NICE Systems\NICE Inform\NICE Inform Client\ClientApps\NiceInform.exe</Filename>
+        </Module>
+      </Company>
+      <Company Name="Microsoft Corporation">
+        <Module Name="ntdll.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\SysWOW64\ntdll.dll</Filename>
+        </Module>
+        <Module Name="MSCOREE.DLL">
+          <Version>4.0.40305.0 (Main.040305-0000)</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.40305.0</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\SYSTEM32\MSCOREE.DLL</Filename>
+        </Module>
+        <Module Name="KERNEL32.dll">
+          <Version>6.1.7601.17965 (win7sp1_gdr.121004-0333)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17965</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\KERNEL32.dll</Filename>
+        </Module>
+        <Module Name="KERNELBASE.dll">
+          <Version>6.1.7601.17965 (win7sp1_gdr.121004-0333)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17965</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\KERNELBASE.dll</Filename>
+        </Module>
+        <Module Name="ADVAPI32.dll">
+          <Version>6.1.7601.19135 (win7sp1_gdr.160121-1718)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19135</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\ADVAPI32.dll</Filename>
+        </Module>
+        <Module Name="msvcrt.dll">
+          <Version>7.0.7601.17744 (win7sp1_gdr.111215-1535)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>7.0.7601.17744</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\msvcrt.dll</Filename>
+        </Module>
+        <Module Name="sechost.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\SysWOW64\sechost.dll</Filename>
+        </Module>
+        <Module Name="RPCRT4.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\RPCRT4.dll</Filename>
+        </Module>
+        <Module Name="SspiCli.dll">
+          <Version>6.1.7601.19135 (win7sp1_gdr.160121-1718)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19135</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\SspiCli.dll</Filename>
+        </Module>
+        <Module Name="CRYPTBASE.dll">
+          <Version>6.1.7601.19135 (win7sp1_gdr.160121-1718)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19135</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\CRYPTBASE.dll</Filename>
+        </Module>
+        <Module Name="mscoreei.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscoreei.dll</Filename>
+        </Module>
+        <Module Name="SHLWAPI.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\SHLWAPI.dll</Filename>
+        </Module>
+        <Module Name="GDI32.dll">
+          <Version>6.1.7601.19091 (win7sp1_gdr.151208-0600)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19091</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\GDI32.dll</Filename>
+        </Module>
+        <Module Name="USER32.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\USER32.dll</Filename>
+        </Module>
+        <Module Name="LPK.dll">
+          <Version>6.1.7601.18985 (win7sp1_gdr.150901-1452)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.18985</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\LPK.dll</Filename>
+        </Module>
+        <Module Name="USP10.dll">
+          <Version>1.0626.7601.19054 (win7sp1_gdr.151103-0600)</Version>
+          <Product>Microsoft(R) Uniscribe Unicode script processor</Product>
+          <ProductVersion>1.0626.7601.19054</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\USP10.dll</Filename>
+        </Module>
+        <Module Name="IMM32.DLL">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\IMM32.DLL</Filename>
+        </Module>
+        <Module Name="MSCTF.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\MSCTF.dll</Filename>
+        </Module>
+        <Module Name="clr.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\clr.dll</Filename>
+        </Module>
+        <Module Name="MSVCR120_CLR0400.dll">
+          <Version>12.00.51720.34280 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® Visual Studio® 12 CTP</Product>
+          <ProductVersion>12.00.51720.34280</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\MSVCR120_CLR0400.dll</Filename>
+        </Module>
+        <Module Name="mscorlib.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\mscorlib\d1265d6159ea876f9d63ea4c1361b587\mscorlib.ni.dll</Filename>
+        </Module>
+        <Module Name="ole32.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\ole32.dll</Filename>
+        </Module>
+        <Module Name="uxtheme.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\uxtheme.dll</Filename>
+        </Module>
+        <Module Name="clrjit.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\clrjit.dll</Filename>
+        </Module>
+        <Module Name="OLEAUT32.dll">
+          <Version>6.1.7601.18640</Version>
+          <Product></Product>
+          <ProductVersion>6.1.7601.18640</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\OLEAUT32.dll</Filename>
+        </Module>
+        <Module Name="CRYPTSP.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\CRYPTSP.dll</Filename>
+        </Module>
+        <Module Name="rsaenh.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\rsaenh.dll</Filename>
+        </Module>
+        <Module Name="RpcRtRemote.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\RpcRtRemote.dll</Filename>
+        </Module>
+        <Module Name="System.ni.dll">
+          <Version>4.0.30319.34238 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34238</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System\85cfc067e323f00f43254de906523a60\System.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Drawing.ni.dll">
+          <Version>4.0.30319.34285 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34285</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Drawing\6361a1993e29d5f4abbe54641df5d680\System.Drawing.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Windows.Forms.ni.dll">
+          <Version>4.0.30319.34251 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34251</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Windows.Forms\66447d8cc63efb39d7f2353e70bf3e9e\System.Windows.Forms.ni.dll</Filename>
+        </Module>
+        <Module Name="nlssorting.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\nlssorting.dll</Filename>
+        </Module>
+        <Module Name="VERSION.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\VERSION.dll</Filename>
+        </Module>
+        <Module Name="WindowsBase.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\WindowsBase\1f8f8a649f61763babca9ab483ed8a60\WindowsBase.ni.dll</Filename>
+        </Module>
+        <Module Name="PresentationCore.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\PresentationCore\754a44b390f7eea7483d47206622a926\PresentationCore.ni.dll</Filename>
+        </Module>
+        <Module Name="dwrite.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\dwrite.dll</Filename>
+        </Module>
+        <Module Name="wpfgfx_v0400.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF\wpfgfx_v0400.dll</Filename>
+        </Module>
+        <Module Name="PresentationNative_v0400.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF\PresentationNative_v0400.dll</Filename>
+        </Module>
+        <Module Name="System.Configuration.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Configuration\28cae61f9f47aa36a4264e7c81e9c42a\System.Configuration.ni.dll</Filename>
+        </Module>
+        <Module Name="shell32.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\shell32.dll</Filename>
+        </Module>
+        <Module Name="System.Xml.ni.dll">
+          <Version>4.0.30319.34283 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34283</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xml\15f700b03eeb82a04fceb518984d0908\System.Xml.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Core.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Core\d07e34d982841898dd11b5abb98456e0\System.Core.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Runtime.Remoting.ni.dll">
+          <Version>4.0.30319.34245 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34245</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Runt73a1fc9d#\62b26569e90ed78e48953f82c9a416a3\System.Runtime.Remoting.ni.dll</Filename>
+        </Module>
+        <Module Name="ws2_32.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\ws2_32.dll</Filename>
+        </Module>
+        <Module Name="NSI.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\NSI.dll</Filename>
+        </Module>
+        <Module Name="mswsock.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\mswsock.dll</Filename>
+        </Module>
+        <Module Name="wshtcpip.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\System32\wshtcpip.dll</Filename>
+        </Module>
+        <Module Name="wship6.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\System32\wship6.dll</Filename>
+        </Module>
+        <Module Name="psapi.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\psapi.dll</Filename>
+        </Module>
+        <Module Name="NLAapi.dll">
+          <Version>6.1.7601.18685 (win7sp1_gdr.141205-1623)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.18685</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\NLAapi.dll</Filename>
+        </Module>
+        <Module Name="napinsp.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\napinsp.dll</Filename>
+        </Module>
+        <Module Name="pnrpnsp.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\pnrpnsp.dll</Filename>
+        </Module>
+        <Module Name="DNSAPI.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\DNSAPI.dll</Filename>
+        </Module>
+        <Module Name="winrnr.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\System32\winrnr.dll</Filename>
+        </Module>
+        <Module Name="System.Data.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Data\3a5b95e9c68c57765ce637183deb7f09\System.Data.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Data.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.Net\assembly\GAC_32\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll</Filename>
+        </Module>
+        <Module Name="CRYPT32.dll">
+          <Version>6.1.7601.18277 (win7sp1_gdr.131005-0934)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.18277</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\CRYPT32.dll</Filename>
+        </Module>
+        <Module Name="MSASN1.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\MSASN1.dll</Filename>
+        </Module>
+        <Module Name="secur32.dll">
+          <Version>6.1.7601.19135 (win7sp1_gdr.160121-1718)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19135</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\secur32.dll</Filename>
+        </Module>
+        <Module Name="gdiplus.dll">
+          <Version>6.1.7601.19061 (win7sp1_gdr.151110-0600)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19061</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\WinSxS\x86_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.7601.19061_none_72d6d48d86649709\gdiplus.dll</Filename>
+        </Module>
+        <Module Name="comctl32.dll">
+          <Version>5.82 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_5.82.7601.18837_none_ec86b8d6858ec0bc\comctl32.dll</Filename>
+        </Module>
+        <Module Name="dwmapi.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\dwmapi.dll</Filename>
+        </Module>
+        <Module Name="WindowsCodecs.dll">
+          <Version>6.1.7601.18741 (win7sp1_gdr.150202-1526)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.18741</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\WindowsCodecs.dll</Filename>
+        </Module>
+        <Module Name="urlmon.dll">
+          <Version>8.00.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Windows® Internet Explorer</Product>
+          <ProductVersion>8.00.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\urlmon.dll</Filename>
+        </Module>
+        <Module Name="XmlLite.dll">
+          <Version>1.3.1000.0</Version>
+          <Product>Microsoft XML Core Services</Product>
+          <ProductVersion>1.3.1000.0</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\syswow64\XmlLite.dll</Filename>
+        </Module>
+        <Module Name="WININET.dll">
+          <Version>8.00.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Windows® Internet Explorer</Product>
+          <ProductVersion>8.00.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\WININET.dll</Filename>
+        </Module>
+        <Module Name="iertutil.dll">
+          <Version>8.00.7601.19104 (win7sp1_gdr.151210-0600)</Version>
+          <Product>Windows® Internet Explorer</Product>
+          <ProductVersion>8.00.7601.19104</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\iertutil.dll</Filename>
+        </Module>
+        <Module Name="WINTRUST.dll">
+          <Version>6.1.7601.18205 (win7sp1_gdr.130708-1532)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.18205</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\WINTRUST.dll</Filename>
+        </Module>
+        <Module Name="mscorsecimpl.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorsecimpl.dll</Filename>
+        </Module>
+        <Module Name="imagehlp.dll">
+          <Version>6.1.7601.18288 (win7sp1_gdr.131018-1533)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.18288</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\imagehlp.dll</Filename>
+        </Module>
+        <Module Name="ncrypt.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\ncrypt.dll</Filename>
+        </Module>
+        <Module Name="bcrypt.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\bcrypt.dll</Filename>
+        </Module>
+        <Module Name="bcryptprimitives.dll">
+          <Version>6.1.7601.19012 (win7sp1_gdr.150921-1559)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19012</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\SysWOW64\bcryptprimitives.dll</Filename>
+        </Module>
+        <Module Name="USERENV.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\USERENV.dll</Filename>
+        </Module>
+        <Module Name="profapi.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\profapi.dll</Filename>
+        </Module>
+        <Module Name="GPAPI.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\GPAPI.dll</Filename>
+        </Module>
+        <Module Name="cryptnet.dll">
+          <Version>6.1.7601.18205 (win7sp1_gdr.130708-1532)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.18205</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\cryptnet.dll</Filename>
+        </Module>
+        <Module Name="WLDAP32.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\WLDAP32.dll</Filename>
+        </Module>
+        <Module Name="SensApi.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\SensApi.dll</Filename>
+        </Module>
+        <Module Name="WINHTTP.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\WINHTTP.dll</Filename>
+        </Module>
+        <Module Name="webio.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\webio.dll</Filename>
+        </Module>
+        <Module Name="credssp.dll">
+          <Version>6.1.7601.19135 (win7sp1_gdr.160121-1718)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19135</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\credssp.dll</Filename>
+        </Module>
+        <Module Name="IPHLPAPI.DLL">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\IPHLPAPI.DLL</Filename>
+        </Module>
+        <Module Name="WINNSI.DLL">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\WINNSI.DLL</Filename>
+        </Module>
+        <Module Name="dhcpcsvc6.DLL">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\dhcpcsvc6.DLL</Filename>
+        </Module>
+        <Module Name="dhcpcsvc.DLL">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\dhcpcsvc.DLL</Filename>
+        </Module>
+        <Module Name="CFGMGR32.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\CFGMGR32.dll</Filename>
+        </Module>
+        <Module Name="rasadhlp.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\rasadhlp.dll</Filename>
+        </Module>
+        <Module Name="RichEd20.DLL">
+          <Version>5.31.23.1230</Version>
+          <Product>Microsoft RichEdit Control, version 3.1</Product>
+          <ProductVersion>3.1</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\system32\RichEd20.DLL</Filename>
+        </Module>
+        <Module Name="Accessibility.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\Accessibility\d9ef873b190c9df202c3f9f8a5d38c48\Accessibility.ni.dll</Filename>
+        </Module>
+        <Module Name="comctl32.DLL">
+          <Version>6.10 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.18837_none_41e855142bd5705d\comctl32.DLL</Filename>
+        </Module>
+        <Module Name="WindowsFormsIntegration.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\WindowsForm0b574481#\9696f131198a6748b5481f58e20b4356\WindowsFormsIntegration.ni.dll</Filename>
+        </Module>
+        <Module Name="PresentationFramework.ni.dll">
+          <Version>4.0.30319.34209</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\Presentatio5ae0f00f#\cf6c48ebc32475e49b3a7dec1e85f675\PresentationFramework.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Xaml.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xaml\abde200e01cfd34122c55783bfe5dc02\System.Xaml.ni.dll</Filename>
+        </Module>
+        <Module Name="PresentationFramework.Aero.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\Presentatio1c9175f8#\ae38d37f0cd997d86dbc329d0470c38f\PresentationFramework.Aero.ni.dll</Filename>
+        </Module>
+        <Module Name="d3d9.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\d3d9.dll</Filename>
+        </Module>
+        <Module Name="d3d8thk.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\d3d8thk.dll</Filename>
+        </Module>
+        <Module Name="WtsApi32.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\WtsApi32.dll</Filename>
+        </Module>
+        <Module Name="WINSTA.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\WINSTA.dll</Filename>
+        </Module>
+        <Module Name="CLBCatQ.DLL">
+          <Version>2001.12.8530.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\CLBCatQ.DLL</Filename>
+        </Module>
+        <Module Name="PenIMC.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\WPF\PenIMC.dll</Filename>
+        </Module>
+        <Module Name="PROPSYS.dll">
+          <Version>7.00.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Windows® Search</Product>
+          <ProductVersion>7.00.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\PROPSYS.dll</Filename>
+        </Module>
+        <Module Name="ntmarta.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\ntmarta.dll</Filename>
+        </Module>
+        <Module Name="SETUPAPI.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\SETUPAPI.dll</Filename>
+        </Module>
+        <Module Name="DEVOBJ.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\syswow64\DEVOBJ.dll</Filename>
+        </Module>
+        <Module Name="MPR.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\MPR.dll</Filename>
+        </Module>
+        <Module Name="PresentationFramework-SystemCore.ni.dll">
+          <Version>4.0.30319.34209</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\Presentatio84a6349c#\c7adec862287c54e558d28b14c54fe21\PresentationFramework-SystemCore.ni.dll</Filename>
+        </Module>
+        <Module Name="winmm.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\winmm.dll</Filename>
+        </Module>
+        <Module Name="PresentationFramework-SystemXml.ni.dll">
+          <Version>4.0.30319.34209</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\Presentatio49d6fefe#\0d194c2b45f04594d656441b09cb5341\PresentationFramework-SystemXml.ni.dll</Filename>
+        </Module>
+        <Module Name="UIAutomationTypes.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\UIAutomationTypes\232495ea0368dada2d208c51f0e5349c\UIAutomationTypes.ni.dll</Filename>
+        </Module>
+        <Module Name="UIAutomationCore.dll">
+          <Version>7.0.0.0 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\UIAutomationCore.dll</Filename>
+        </Module>
+        <Module Name="OLEACC.dll">
+          <Version>7.0.0.0 (win7sp1_gdr.110826-1504)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17676</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\system32\OLEACC.dll</Filename>
+        </Module>
+        <Module Name="PresentationFramework-SystemData.ni.dll">
+          <Version>4.0.30319.34209</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\Presentatio84a7b877#\84c962634d8a88adfa185d64fb9bbbb0\PresentationFramework-SystemData.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Numerics.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Numerics\de2a832558f95db343e443c365bd3575\System.Numerics.ni.dll</Filename>
+        </Module>
+        <Module Name="MMDevAPI.DLL">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\MMDevAPI.DLL</Filename>
+        </Module>
+        <Module Name="wdmaud.drv">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\wdmaud.drv</Filename>
+        </Module>
+        <Module Name="ksuser.dll">
+          <Version>6.1.7601.19091 (win7sp1_gdr.151208-0600)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.19091</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\system32\ksuser.dll</Filename>
+        </Module>
+        <Module Name="AVRT.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\AVRT.dll</Filename>
+        </Module>
+        <Module Name="AUDIOSES.DLL">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\AUDIOSES.DLL</Filename>
+        </Module>
+        <Module Name="msacm32.drv">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\msacm32.drv</Filename>
+        </Module>
+        <Module Name="MSACM32.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\MSACM32.dll</Filename>
+        </Module>
+        <Module Name="midimap.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\midimap.dll</Filename>
+        </Module>
+        <Module Name="imaadp32.acm">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\imaadp32.acm</Filename>
+        </Module>
+        <Module Name="msg711.acm">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\msg711.acm</Filename>
+        </Module>
+        <Module Name="msgsm32.acm">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\msgsm32.acm</Filename>
+        </Module>
+        <Module Name="msadp32.acm">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\msadp32.acm</Filename>
+        </Module>
+        <Module Name="explorerframe.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\explorerframe.dll</Filename>
+        </Module>
+        <Module Name="DUser.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\DUser.dll</Filename>
+        </Module>
+        <Module Name="DUI70.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\DUI70.dll</Filename>
+        </Module>
+        <Module Name="apphelp.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\apphelp.dll</Filename>
+        </Module>
+        <Module Name="EhStorShell.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\EhStorShell.dll</Filename>
+        </Module>
+        <Module Name="ntshrui.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\ntshrui.dll</Filename>
+        </Module>
+        <Module Name="srvcli.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\srvcli.dll</Filename>
+        </Module>
+        <Module Name="cscapi.dll">
+          <Version>6.1.7601.17514 (win7sp1_rtm.101119-1850)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7601.17514</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\cscapi.dll</Filename>
+        </Module>
+        <Module Name="slc.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\slc.dll</Filename>
+        </Module>
+        <Module Name="tiptsf.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Program Files (x86)\Common Files\microsoft shared\ink\tiptsf.dll</Filename>
+        </Module>
+        <Module Name="NetworkExplorer.dll">
+          <Version>6.1.7600.16385 (win7_rtm.090713-1255)</Version>
+          <Product>Microsoft® Windows® Operating System</Product>
+          <ProductVersion>6.1.7600.16385</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\NetworkExplorer.dll</Filename>
+        </Module>
+        <Module Name="System.Xml.Linq.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Xml.Linq\c62aaf02598578d447d7c67cb8419262\System.Xml.Linq.ni.dll</Filename>
+        </Module>
+        <Module Name="System.Runtime.Serialization.ni.dll">
+          <Version>4.0.30319.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\System.Runteb92aa12#\ed9bd0ae44cbbc471e39b9cb779a4dec\System.Runtime.Serialization.ni.dll</Filename>
+        </Module>
+        <Module Name="PresentationFramework-SystemXmlLinq.ni.dll">
+          <Version>4.0.30319.34209</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>4.0.30319.34209</ProductVersion>
+          <Language>Language Neutral</Language>
+          <Filename>C:\Windows\assembly\NativeImages_v4.0.30319_32\Presentatio4b37ff64#\ac2d125d610c26bfee4b40597053ef44\PresentationFramework-SystemXmlLinq.ni.dll</Filename>
+        </Module>
+        <Module Name="diasymreader.dll">
+          <Version>12.0.51209.34209 built by: FX452RTMGDR</Version>
+          <Product>Microsoft® .NET Framework</Product>
+          <ProductVersion>12.0.51209.34209</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\Microsoft.NET\Framework\v4.0.30319\diasymreader.dll</Filename>
+        </Module>
+      </Company>
+      <Company Name="NVIDIA Corporation">
+        <Module Name="nvd3dum.dll">
+          <Version>9.18.13.4052</Version>
+          <Product>NVIDIA Windows WDDM D3D driver</Product>
+          <ProductVersion>9.18.13.4052</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\system32\nvd3dum.dll</Filename>
+        </Module>
+      </Company>
+      <Company Name="Fraunhofer Institut Integrierte Schaltungen IIS">
+        <Module Name="l3codeca.acm">
+          <Version>1, 9, 0, 0401</Version>
+          <Product>MPEG Layer-3 Audio Codec for MSACM</Product>
+          <ProductVersion>1, 0, 0, 0</ProductVersion>
+          <Language>English (United States)</Language>
+          <Filename>C:\Windows\SysWOW64\l3codeca.acm</Filename>
+        </Module>
+      </Company>
+    </Modules>
+    <NETAssemblies>
+      <Assembly Name="mscorlib">
+        <Version>4.0.0.0</Version>
+        <DisplayName>mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="NiceInform">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>NiceInform, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Host">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Host, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Contracts">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Contracts, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Windows.Forms">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Drawing">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</DisplayName>
+      </Assembly>
+      <Assembly Name="System">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Common">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Common, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="log4net">
+        <Version>1.2.10.0</Version>
+        <DisplayName>log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Common.Utilities">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Common.Utilities, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Controls">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Controls, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="PresentationCore">
+        <Version>4.0.0.0</Version>
+        <DisplayName>PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="WindowsBase">
+        <Version>4.0.0.0</Version>
+        <DisplayName>WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="Microsoft.Practices.Unity">
+        <Version>2.0.414.0</Version>
+        <DisplayName>Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Configuration">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Xml">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Core">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.ResultsGui">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.ResultsGui, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Runtime.Remoting">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Runtime.Remoting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Anonymously Hosted DynamicMethods Assembly">
+        <Version>0.0.0.0</Version>
+        <DisplayName>Anonymously Hosted DynamicMethods Assembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Data">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Common.Images">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Common.Images, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Reconstruction">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Reconstruction, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Query">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Query, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Playback">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Playback, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Annotate">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Annotate, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.Dimetra">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.Dimetra, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.ESRIMapping">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.ESRIMapping, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.Situator">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.Situator, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.SkySoft">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.SkySoft, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Microsoft.Practices.Unity.Configuration">
+        <Version>2.0.414.0</Version>
+        <DisplayName>Microsoft.Practices.Unity.Configuration, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.NiceVision">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.NiceVision, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.WindowsMediaVideo">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.WindowsMediaVideo, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.Netopia">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.Netopia, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Plugins.NiceRecording">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Plugins.NiceRecording, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.Audio">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.Audio, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Accessibility">
+        <Version>4.0.0.0</Version>
+        <DisplayName>Accessibility, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</DisplayName>
+      </Assembly>
+      <Assembly Name="WindowsFormsIntegration">
+        <Version>4.0.0.0</Version>
+        <DisplayName>WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="PresentationFramework">
+        <Version>4.0.0.0</Version>
+        <DisplayName>PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Xaml">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Xaml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="PresentationFramework.Aero">
+        <Version>4.0.0.0</Version>
+        <DisplayName>PresentationFramework.Aero, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="PresentationFramework-SystemCore">
+        <Version>4.0.0.0</Version>
+        <DisplayName>PresentationFramework-SystemCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.SpokenDateTime">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.SpokenDateTime, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="PresentationFramework-SystemXml">
+        <Version>4.0.0.0</Version>
+        <DisplayName>PresentationFramework-SystemXml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="UIAutomationTypes">
+        <Version>4.0.0.0</Version>
+        <DisplayName>UIAutomationTypes, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</DisplayName>
+      </Assembly>
+      <Assembly Name="PresentationFramework-SystemData">
+        <Version>4.0.0.0</Version>
+        <DisplayName>PresentationFramework-SystemData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Numerics">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Client.ScenarioImportExport">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Client.ScenarioImportExport, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Xml.Linq">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Nice.Inform.Common.Serialization">
+        <Version>7.0.3716.53</Version>
+        <DisplayName>Nice.Inform.Common.Serialization, Version=7.0.3716.53, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="System.Runtime.Serialization">
+        <Version>4.0.0.0</Version>
+        <DisplayName>System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+      <Assembly Name="Microsoft.GeneratedCode">
+        <Version>1.0.0.0</Version>
+        <DisplayName>Microsoft.GeneratedCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="Microsoft.GeneratedCode">
+        <Version>1.0.0.0</Version>
+        <DisplayName>Microsoft.GeneratedCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</DisplayName>
+      </Assembly>
+      <Assembly Name="PresentationFramework-SystemXmlLinq">
+        <Version>4.0.0.0</Version>
+        <DisplayName>PresentationFramework-SystemXmlLinq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</DisplayName>
+      </Assembly>
+    </NETAssemblies>
+    <Culture>
+      <Name>es-AR</Name>
+      <NativeName>Español (Argentina)</NativeName>
+      <DisplayName>Spanish (Argentina)</DisplayName>
+      <EnglishName>Spanish (Argentina)</EnglishName>
+      <LCID>11274</LCID>
+      <ThreeLetterISOLanguageName>spa</ThreeLetterISOLanguageName>
+      <ThreeLetterISOLanguageName>spa</ThreeLetterISOLanguageName>
+      <TwoLetterISOLanguageName>es</TwoLetterISOLanguageName>
+      <UseUserOverride>Yes</UseUserOverride>
+      <IsNeutralCulture>No</IsNeutralCulture>
+      <TextInfo>
+        <CultureName>es-AR</CultureName>
+        <LCID>11274</LCID>
+        <IsRightToLeft>No</IsRightToLeft>
+        <ListSeparator>,</ListSeparator>
+        <ANSICodePage>1252</ANSICodePage>
+        <EBCDICCodePage>20284</EBCDICCodePage>
+        <MacCodePage>10000</MacCodePage>
+        <OEMCodePage>850</OEMCodePage>
+      </TextInfo>
+      <DateTimeFormat>
+        <FullDateTimePattern>dddd, dd' de 'MMMM' de 'yyyy HH:mm:ss</FullDateTimePattern>
+        <LongDatePattern>dddd, dd' de 'MMMM' de 'yyyy</LongDatePattern>
+        <ShortDatePattern>dd/MM/yyyy</ShortDatePattern>
+        <LongTimePattern>HH:mm:ss</LongTimePattern>
+        <ShortTimePattern>hh:mm tt</ShortTimePattern>
+        <DateSeparator>/</DateSeparator>
+        <TimeSeparator>:</TimeSeparator>
+        <MonthDayPattern>dd MMMM</MonthDayPattern>
+        <YearMonthPattern>MMMM' de 'yyyy</YearMonthPattern>
+        <PMDesignator>p.m.</PMDesignator>
+      </DateTimeFormat>
+    </Culture>
+    <TimeZone>
+      <Name>Argentina Standard Time</Name>
+      <DaylightName>Argentina Daylight Time</DaylightName>
+      <IsInDaylightSavingTime>No</IsInDaylightSavingTime>
+      <OffsetFromUTC>-03:00:00</OffsetFromUTC>
+      <DaylightSaving>TimeZone does not have daylight saving</DaylightSaving>
+    </TimeZone>
+  </ClientSystem>
+</SystemInfo>

@@ -26,11 +26,12 @@ function memLog(tag) {
 const WHISPER_BIN =
   process.env.WHISPER_BIN || "/home/administrator/whisper_env/bin/whisper";
 const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
+
 function whisperCmd(wavPath, outDir) {
   const modelDirArg = WHISPER_MODEL_DIR
     ? ` --model_dir "${WHISPER_MODEL_DIR}"`
     : "";
-  return `"${WHISPER_BIN}" "${wavPath}" --model small --language Spanish --output_dir "${outDir}" --output_format txt${modelDirArg}`;
+  return `"${WHISPER_BIN}" "${wavPath}" --model large --language Spanish --output_dir "${outDir}" --output_format txt${modelDirArg}`;
 }
 if (!fs.existsSync(WHISPER_BIN)) {
   logErr("No se encontró WHISPER_BIN en:", WHISPER_BIN);
@@ -166,11 +167,9 @@ const procesarZip = async (req, res) => {
     );
     log("Ruta absoluta de Recorded Items:", rutaItemsXML);
     if (!fs.existsSync(rutaItemsXML)) {
-      return res
-        .status(404)
-        .json({
-          error: "No se encontró el archivo Recorded Items.xml interno",
-        });
+      return res.status(404).json({
+        error: "No se encontró el archivo Recorded Items.xml interno",
+      });
     }
 
     const itemsData = fs.readFileSync(rutaItemsXML, "utf-8");
@@ -326,16 +325,12 @@ const procesarZip = async (req, res) => {
         }),
         new Paragraph({ text: `👤 ID: ${extra.UnitID || "-"}`, bold: true }),
         new Paragraph({ text: `📝 Transcripción:` }),
-        ...contenido
-          .split(/\r?\n/)
-          .map(
-            (line) =>
-              new Paragraph({
-                children: [
-                  new TextRun({ text: (line || "").trim(), size: 24 }),
-                ],
-              })
-          ),
+        ...contenido.split(/\r?\n/).map(
+          (line) =>
+            new Paragraph({
+              children: [new TextRun({ text: (line || "").trim(), size: 24 })],
+            })
+        ),
         new Paragraph("────────────────────────────────────────────")
       );
       const tParas1 = Date.now();
@@ -414,12 +409,10 @@ const procesarZip = async (req, res) => {
     const t1 = Date.now();
     log(`JOB ${path.basename(jobDir)} FIN en ${t1 - t0} ms`);
     memLog("fin job");
-    return res
-      .status(200)
-      .json({
-        mensaje: "Escenario transcripto completamente",
-        archivo: publicPath,
-      });
+    return res.status(200).json({
+      mensaje: "Escenario transcripto completamente",
+      archivo: publicPath,
+    });
   } catch (err) {
     logErr("Error no controlado:", err?.stack || err?.message || err);
     // en error, no borramos work/ para inspección

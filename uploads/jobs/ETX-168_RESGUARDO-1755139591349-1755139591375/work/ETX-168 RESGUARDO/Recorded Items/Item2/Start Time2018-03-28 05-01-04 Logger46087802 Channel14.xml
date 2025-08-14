@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item Type="AudioItem">
+  <RecordedItem Version="3">
+    <Guid>858de8bf-5238-4a8b-8ab5-6daa40808a76</Guid>
+    <ParallelRecordingStatus>Unpaired</ParallelRecordingStatus>
+    <ParallelRecordingPairGuid>00000000-0000-0000-0000-000000000000</ParallelRecordingPairGuid>
+    <DummyInformSourceId>330</DummyInformSourceId>
+    <Emergency>False</Emergency>
+    <LinkGuid>00000000-0000-0000-0000-000000000000</LinkGuid>
+    <SearchResults Version="1" Type="SearchResultsCls89">
+      <SearchResult Version="2">
+        <CallIdentifier>61068964</CallIdentifier>
+        <Channel>14</Channel>
+        <Logger>46087802</Logger>
+        <CallId>
+          <StartTime>2018/03/28 05:01:04.0800000</StartTime>
+          <Duration>00:00:01.0930000</Duration>
+          <InformSourceId>330</InformSourceId>
+          <DataSourceId>2</DataSourceId>
+        </CallId>
+        <Fields Count="70">
+          <Field Name="Start_Time">
+            <Value>2018/03/28 05:01:04.0800000</Value>
+            <Type>System.DateTime</Type>
+          </Field>
+          <Field Name="Stop_Time">
+            <Value>2018/03/28 05:01:05.1730000</Value>
+            <Type>System.DateTime</Type>
+          </Field>
+          <Field Name="Logger">
+            <Value>46087802</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="Channel">
+            <Value>14</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="Rec_Start_Time">
+            <Value>2018/03/28 05:01:04.0800000</Value>
+            <Type>System.DateTime</Type>
+          </Field>
+          <Field Name="Rec_Stop_Time">
+            <Value>2018/03/28 05:01:05.1730000</Value>
+            <Type>System.DateTime</Type>
+          </Field>
+          <Field Name="Duration">
+            <Value>1</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="Agent_ID">
+            <Value>16779452</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Station">
+            <Value>N/A</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Trunk">
+            <Value>0001/00001</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Status">
+            <Value>OK</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Cls_Call_Id">
+            <Value>61068964</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="Unit">
+            <Value>1</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="CallHandle">
+            <Value>30283-2965-13431703</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="CallType">
+            <Value>Group Call</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="EventType">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="CallPriority">
+            <Value>Normal (Critical)</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="AudioEncoding">
+            <Value>Digital</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="EncryptionState">
+            <Value>Coded</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="SecureKey">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="UnitID">
+            <Value>20232</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="IndividualAlias">
+            <Value>CRIA38-R61</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="ZoneID">
+            <Value>1</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="ZoneAlias">
+            <Value>ZONE001</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="SiteID">
+            <Value>5</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="SiteAlias">
+            <Value>Unknown</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="AudioAvailability">
+            <Value>Audio Available</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="EndOfCallReason">
+            <Value>Normal</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="CallShedStatus">
+            <Value>Call accepted</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Frequency">
+            <Value>0</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="FrequencyAlias">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="PrivateLineCode">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="PrivateLineAlias">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="SecureKeyAlias">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="RadioStatusAlias">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="vcArchivePath">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="iArchiveIdHigh">
+            <Value>0</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="iArchiveIdLow">
+            <Value>0</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="iArchiveClass">
+            <Value>5</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="vcScServerId">
+            <Value>Z001S001SC01.nmd1.zone1</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="vcArchiveUniqueId">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Agent_Name">
+            <Value>CIRC. 6</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Recorded">
+            <Value>Y</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="TargetIndividualAlias">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="NetworkID">
+            <Value>0</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="SystemID">
+            <Value>0</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="ForeignSystemAlias">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="ConsoleNetworkID">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="ConsoleSystemID">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="ForeignConsoleSystemAlias">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="KeysetID">
+            <Value>0</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="KeysetAlias">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="UnitIDString">
+            <Value>20232</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="TextMessageID">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="TextBody">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="GroupTextAddress">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="GroupTextMessageDisplay">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="TargetUnitIDString">
+            <Value></Value>
+            <Type>System.DBNull</Type>
+          </Field>
+          <Field Name="Call_ID">
+            <Value>13462601</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="Call_Index">
+            <Value>0</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="ParentClsCallId">
+            <Value>61068964</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="Phone_Number">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Dialed_In">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="TargetUnitID">
+            <Value>0</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="ConvTalkgroupID">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="Duration_HiRes">
+            <Value>1093</Value>
+            <Type>System.Int32</Type>
+          </Field>
+          <Field Name="TrunkGroup_ID">
+            <Value>16779452</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="TrunkGroup_Name">
+            <Value>CIRC. 6</Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="DTMF">
+            <Value></Value>
+            <Type>System.String</Type>
+          </Field>
+          <Field Name="MediaType">
+            <Value>voice</Value>
+            <Type>System.String</Type>
+          </Field>
+        </Fields>
+        <Annotations Version="2" Count="0" />
+      </SearchResult>
+      <SearchResultsCls89 Version="3">
+        <RecorderStartTime>2018/03/28 05:01:04.0800000</RecorderStartTime>
+        <IsRecordingInProgress>False</IsRecordingInProgress>
+        <AniAli Version="1" Count="0" />
+      </SearchResultsCls89>
+    </SearchResults>
+  </RecordedItem>
+  <PlayableItem Version="1">
+    <DataAvailabilityState>Fully</DataAvailabilityState>
+  </PlayableItem>
+  <AudioItem Version="2">
+    <LoggerRecordings Count="1">
+      <Recording>
+        <BytesDownloaded>17488</BytesDownloaded>
+        <ChannelId>14</ChannelId>
+        <CompressionType>Imbe_48</CompressionType>
+        <LoggerId>46087802</LoggerId>
+        <ReplayLoggerNetworkAddress>10.1.1.73</ReplayLoggerNetworkAddress>
+        <ReplayLoggerID>46087802</ReplayLoggerID>
+        <RecordingDuration>00:00:01.0930000</RecordingDuration>
+        <RecordingStartTime>2018/03/28 05:01:04.0800000</RecordingStartTime>
+        <StartTime>2018/03/28 05:01:04.0800000</StartTime>
+        <Status>Retrieved</Status>
+        <StorageCenterFileNodeName />
+        <WaveFileName>20180328_050104000000_46087802_14_1.wav</WaveFileName>
+      </Recording>
+    </LoggerRecordings>
+    <AudioItemType>RadioCall</AudioItemType>
+    <IsMuted>false</IsMuted>
+    <Volume>50</Volume>
+    <Pan>50</Pan>
+    <UseMasterPanSetting>false</UseMasterPanSetting>
+  </AudioItem>
+</Item>

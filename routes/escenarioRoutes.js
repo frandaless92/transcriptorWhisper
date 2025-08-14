@@ -1,11 +1,19 @@
+// routes/escenarioRoutes.js
 const express = require("express");
-const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const { procesarZip } = require("../controllers/escenarioController");
 
-// Asegurar carpetas
+const { procesarZip } = require("../controllers/escenarioController"); // tu sync (si la querés conservar)
+const {
+  encolarZip,
+  estadoZip,
+} = require("../controllers/escenarioControllerAsync");
+const { listarTrabajos } = require("../controllers/historialController");
+
+const router = express.Router();
+
+// Asegurar inbox
 const inboxDir = path.join(__dirname, "..", "uploads", "inbox");
 fs.mkdirSync(inboxDir, { recursive: true });
 
@@ -14,10 +22,9 @@ const storage = multer.diskStorage({
   filename: (_req, file, cb) => {
     const ext = path.extname(file.originalname);
     const base = path.basename(file.originalname, ext).replace(/\s+/g, "_");
-    cb(null, `${base}-${Date.now()}${ext}`); // nombre único
+    cb(null, `${base}-${Date.now()}${ext}`);
   },
 });
-
 const upload = multer({
   storage,
   fileFilter: (_req, file, cb) => {
@@ -26,10 +33,15 @@ const upload = multer({
       file.originalname.toLowerCase().endsWith(".zip");
     cb(ok ? null : new Error("El archivo debe ser .zip"), ok);
   },
-  limits: { fileSize: 1024 * 1024 * 1024 }, // 1 GB opcional
+  limits: { fileSize: 1024 * 1024 * 1024 },
 });
 
-// POST /escenario/cargarZip (campo: "archivo")
+// === SINCRÓNICO (opcional, como lo tenías)
 router.post("/cargarZip", upload.single("archivo"), procesarZip);
+
+// === ASINCRÓNICO (nuevo)
+router.post("/cargarZipAsync", upload.single("archivo"), encolarZip);
+router.get("/estado/:jobId", estadoZip);
+router.get("/historial", listarTrabajos);
 
 module.exports = router;
