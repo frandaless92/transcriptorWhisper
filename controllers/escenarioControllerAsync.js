@@ -572,21 +572,79 @@ async function runZipJob(zipPath, update) {
       const tParas0 = Date.now();
 
       // Función para limpiar contenido de Whisper y dejarlo plano
+      // ⬇️ Reemplazá tu limpiarTextoWhisper por este:
       function limpiarTextoWhisper(txt) {
         if (!txt) return "";
-        const sinMarcasTiempo = txt
+
+        // Unificar a una sola línea
+        let s = txt
           .split(/\r?\n/)
+          // Quita marcas [00:00.000 --> 00:02.000]
           .map((l) =>
             l
               .replace(
-                /^\s*\[\d{2}:\d{2}:\d{2}(?:[\.,]\d+)?\s*-->\s*\d{2}:\d{2}:\d{2}(?:[\.,]\d+)?\]\s*/,
+                /^\s*\[\d{2}:\d{2}:\d{2}(?:[.,]\d+)?\s*-->\s*\d{2}:\d{2}:\d{2}(?:[.,]\d+)?\]\s*/,
                 ""
               )
               .trim()
           )
           .filter(Boolean)
           .join(" ");
-        return sinMarcasTiempo.replace(/\s+/g, " ").trim();
+
+        // Normalizar espacios
+        s = s.replace(/\s+/g, " ").trim();
+
+        // 🔥 Filtros “fruta” típicos de subtítulos / web / CTA
+        const FRUTAS_RE = [
+          /\bsubtitles?\s+by\b/i,
+          /\b(subtitulado|subtitulado por|subtitulos?)\b/i,
+          /\bpaginas?\.org\b/i,
+          /\bamara\.org\b/i,
+          /\byoutube\.com\b/i,
+          /\b(open|visit|go to)\s+\w+\.\w{2,}/i,
+          /\b(visita|seguime?|suscr[ií]bete?|dale\s+like|compart[ií]|activa\s+la\s+campanita)\b/i,
+          /\b(mira|mir[aá]n)\s+(el|este)\s+video\b/i,
+          /\b(gracias por su atenci[oó]n|thanks for watching)\b/i,
+          /\bsubtitles?\s*:\s*/i,
+        ];
+        FRUTAS_RE.forEach((re) => {
+          s = s.replace(re, "").trim();
+        });
+
+        // Eliminar URL / emails / dominios sueltos
+        s = s
+          .replace(/\bhttps?:\/\/\S+\b/gi, "")
+          .replace(/\bwww\.\S+\b/gi, "")
+          .replace(/\b\S+\.(com|org|net|ar|es|io|gov|edu)\b/gi, "")
+          .replace(/\b[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}\b/g, "")
+          .trim();
+
+        // Sacar basura entre paréntesis común en subtítulos
+        s = s
+          .replace(
+            /\((?:music|applause|laughter|inaudible|ininteligible|subtitles?)[^)]*\)/gi,
+            ""
+          )
+          .trim();
+
+        // Si arranca con fórmulas “video”, “canal”, “suscríbete”, etc., borrarlas
+        s = s
+          .replace(
+            /^(?:video|canal|suscr[ií]bete?|like|coment[ae]|compart[ií])[:\s-]+/i,
+            ""
+          )
+          .trim();
+
+        // Si quedó sólo “gracias” o cosas muy genéricas, vaciar
+        if (/^\s*(gracias|ok|bueno|listo)\s*\.?$/i.test(s)) s = "";
+
+        // Si hay demasiados caracteres no alfabéticos seguidos (ruido), limpiar un poco
+        s = s
+          .replace(/[^\p{L}\p{N}\s,.\-:+/]/gu, "")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        return s;
       }
 
       // Forzar final ".-"
@@ -636,8 +694,53 @@ async function runZipJob(zipPath, update) {
 
       // Texto final
       let texto = limpiarTextoWhisper(contenido);
+      // Heurística: si queda muy corto o casi sin letras, marcar ININTELIGIBLE
+      const soloLetras = (texto || "").replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/g, "");
+      if (!texto || texto.length < 6 || soloLetras.length < 4) {
+        texto = "(ININTELIGIBLE)";
+      }
       if (!texto || /^\[?ERROR AL TRANSCRIBIR\]?/i.test(texto)) {
         texto = "(SIN AUDIO)";
+      }
+      const LEX_POLICIAL = [
+        "QSL",
+        "QRV",
+        "QTH",
+        "QRM",
+        "QRX",
+        "QRT",
+        "QRP",
+        "QRO",
+        "QSY",
+        "QSA",
+        "QSB",
+        "QTC",
+        "QTR",
+        "CPM",
+        "S.I.",
+        "LRRP",
+        "MÓVIL",
+        "PATRULLA",
+        "OPERATIVO",
+        "FRECUENCIA",
+        "SEGURA",
+        "EN TRÁNSITO",
+        "IRRADIÓ",
+        "PARTE",
+        "RADIO",
+        "BASE",
+        "COMISARÍA",
+        "CRÍA",
+        "UNIDAD",
+        "ALERTA",
+        "ALARMA",
+      ];
+      const hayPolicial = LEX_POLICIAL.some((t) =>
+        (texto || "").toLocaleUpperCase("es-AR").includes(t)
+      );
+      if (!hayPolicial && texto !== "(ININTELIGIBLE)") {
+        // si no hay ninguna pista del dominio y el largo es dudoso, declararlo ininteligible
+        if (texto.length < 20) texto = "(ININTELIGIBLE)";
       }
       texto = finalizarConPuntoGuion(U(texto));
 
