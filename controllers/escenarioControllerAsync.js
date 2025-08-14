@@ -661,7 +661,7 @@ async function runZipJob(zipPath, update) {
       memLog(`${nombreItem} fin`);
       log(`← ${nombreItem} OK en ${tItem1 - tItem0} ms`);
     }
-
+    const cm = (v) => Math.round(v * 566.929); // 1 cm = 566.929 twips
     // 6) Armar DOCX (80% -> 95%)
     update({ progress: 90 });
     const doc = new Document({
@@ -669,13 +669,18 @@ async function runZipJob(zipPath, update) {
         {
           properties: {
             page: {
+              // Márgenes (usar left/right; mirror los hace interior/exterior)
               margin: {
-                top: 1888, // 3,33 cm
-                bottom: 1440, // 2,54 cm
-                inside: 2403, // 4,24 cm (interior)
-                outside: 748, // 1,32 cm (exterior)
+                top: cm(3.33), // 3,33 cm  ≈ 1890 twips
+                bottom: cm(2.54), // 2,54 cm  = 1440 twips
+                left: cm(4.24), // interior (odd pages) 4,24 cm ≈ 2404 twips
+                right: cm(1.32), // exterior (odd pages) 1,32 cm ≈  748 twips
+                // header/footer/gutter opcionales:
+                // header: cm(1.27),
+                // footer: cm(1.27),
+                // gutter: 0,
               },
-              mirror: true, // márgenes simétricos
+              mirror: true, // activa márgenes simétricos (mirror margins)
             },
           },
           children: docParagraphs,
@@ -683,11 +688,29 @@ async function runZipJob(zipPath, update) {
       ],
     });
 
+    // Inserta <w:mirrorMargins/> dentro de <w:sectPr> en word/document.xml
+    function forceMirrorMargins(docxBuffer) {
+      const zip = new AdmZip(docxBuffer);
+      const entry = zip.getEntry("word/document.xml");
+      if (!entry) return docxBuffer;
+
+      let xml = zip.readAsText(entry);
+
+      // si ya existe, no duplicar
+      if (!/<w:mirrorMargins\/>/.test(xml)) {
+        // inserta justo después de la apertura de <w:sectPr>
+        xml = xml.replace(/(<w:sectPr\b[^>]*>)/, `$1<w:mirrorMargins/>`);
+      }
+
+      zip.updateFile("word/document.xml", Buffer.from(xml, "utf8"));
+      return zip.toBuffer();
+    }
+
     let buffer;
     try {
       buffer = await Packer.toBuffer(doc);
     } catch (e) {
-      logErr("Packer falló:", e?.message || e);
+      // fallback mínimo si Packer falla
       const mini = new Document({
         sections: [
           { children: [new Paragraph("Transcripción generada parcialmente.")] },
@@ -695,6 +718,9 @@ async function runZipJob(zipPath, update) {
       });
       buffer = await Packer.toBuffer(mini);
     }
+
+    // 🔧 Fuerza márgenes simétricos en el XML del DOCX
+    buffer = forceMirrorMargins(buffer);
 
     const fileName = `${base}.docx`;
     const docPath = path.join(jobDir, fileName);
