@@ -49,9 +49,7 @@ const WHISPER_MODEL_DIR = process.env.WHISPER_MODEL_DIR || "";
 
 const INITIAL_PROMPT_ASCII =
   "Audio de comunicaciones de radio policiales. Usar abreviaturas y codigo Q. " +
-  "Correccion importante: si se escucha 'y radio parte', transcribir 'irradio parte'. " +
-  "Abreviaturas/siglas: CPM (Central de Policia Metropolitana), S.I. (Servicio de Inteligencia), " +
-  "LRRP, movil, patrulla, operativo, frecuencia segura, en transito, cambio y fuera. " +
+  "Abreviaturas/siglas" +
   "Codigo Q frecuente: QSL, QRV, QTH, QRM, QRX, QRT, QRP, QRO, QSY, QSA, QSB, QTC, QTR.";
 
 const USE_INITIAL_PROMPT =
@@ -140,15 +138,11 @@ function runWhisperAsync(wavPath, outDir) {
     const args = [
       wavPath,
       "--model",
-      process.env.WHISPER_MODEL || "large-v3",
+      "large-v3",
       "--language",
       process.env.WHISPER_LANG || "Spanish",
       "--fp16",
       "False",
-      "--temperature",
-      "0",
-      "--beam_size",
-      "5",
       "--output_dir",
       outDir,
       "--output_format",
@@ -414,7 +408,12 @@ async function runZipJob(zipPath, update) {
       const archivo = audio?.WaveFileName?.[0] || "-";
       const itemBaseDir = path.dirname(xmlItemPath);
       const wavPathOriginal = path.join(itemBaseDir, archivo);
-      const txtPath = path.join(itemBaseDir, archivo.replace(/\.\w+$/, ".txt"));
+
+      // TXT "clásico" (por si existe de antes)
+      const txtPathFromOriginal = path.join(
+        itemBaseDir,
+        path.basename(wavPathOriginal, path.extname(wavPathOriginal)) + ".txt"
+      );
 
       log(`${nombreItem}: WAV original=${wavPathOriginal}`);
 
@@ -457,7 +456,16 @@ async function runZipJob(zipPath, update) {
           } catch (e) {
             logErr(`${nombreItem}: Whisper FALLÓ ::`, e?.message || e);
             try {
-              fs.writeFileSync(txtPath, "[ERROR AL TRANSCRIBIR]");
+              const baseNameFinal = path.basename(
+                wavSanitizado || wavPathOriginal,
+                path.extname(wavSanitizado || wavPathOriginal)
+              );
+              const txtPathFromSanitized = path.join(
+                itemBaseDir,
+                baseNameFinal + ".txt"
+              );
+              const targetTxt = txtPathFromSanitized || txtPathFromOriginal;
+              fs.writeFileSync(targetTxt, "[ERROR AL TRANSCRIBIR]");
             } catch {}
           }
         } else {
@@ -477,11 +485,43 @@ async function runZipJob(zipPath, update) {
         } catch {}
       }
 
+      // Determinar el TXT exacto que debería haber generado Whisper según el WAV usado
+      let txtPath;
+      try {
+        // Si sanitizamos, el archivo final fue *.san.wav => *.san.txt
+        // (Si FFmpeg falló, wavSanitizado == wavPathOriginal)
+        const baseNameFinal = path.basename(
+          wavSanitizado || wavPathOriginal,
+          path.extname(wavSanitizado || wavPathOriginal)
+        );
+        const txtPathFromSanitized = path.join(
+          itemBaseDir,
+          baseNameFinal + ".txt"
+        );
+
+        // Preferimos el TXT del WAV realmente usado (sanitizado). Si no existe, probamos el "clásico".
+        if (fs.existsSync(txtPathFromSanitized)) {
+          txtPath = txtPathFromSanitized;
+        } else if (fs.existsSync(txtPathFromOriginal)) {
+          txtPath = txtPathFromOriginal;
+        } else {
+          // Si no hay ninguno, dejamos elegido el esperado (sanitizado) para loguear size=n/a
+          txtPath = txtPathFromSanitized;
+        }
+
+        log(`[DEBUG] Esperando TXT en: ${txtPath}`);
+      } catch (err) {
+        logErr(`[DEBUG] No se pudo construir ruta TXT: ${err?.message || err}`);
+      }
+
       // leer txt
       let contenido = "[ERROR AL TRANSCRIBIR]";
       const tReadTxt0 = Date.now();
       try {
-        contenido = fs.readFileSync(txtPath, "utf-8");
+        if (fs.existsSync(txtPath)) {
+          const raw = fs.readFileSync(txtPath, "utf-8");
+          contenido = (raw || "").trim() || "[ERROR AL TRANSCRIBIR]";
+        }
       } catch {}
       const tReadTxt1 = Date.now();
       log(
