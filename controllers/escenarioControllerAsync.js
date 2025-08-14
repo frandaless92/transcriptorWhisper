@@ -25,7 +25,7 @@ function runWhisperAsync(wavPath, outDir) {
     const args = [
       wavPath,
       "--model",
-      "large-v3",
+      "large",
       "--language",
       "Spanish",
       "--initial_prompt",
